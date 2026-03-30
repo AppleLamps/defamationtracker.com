@@ -7,6 +7,7 @@
 <meta name="description" content="Independent data investigation: 1,541 posts from @ProjectConstitu analyzed for a pattern of potentially defamatory claims against Erika Kirk and Turning Point USA. Charts, timeline, and legal context. Not legal advice.">
 <meta name="author" content="Apple Lamps">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="google-site-verification" content="4GF4MGFPKrlfVsoSIV9N4TiaFvZZr5jRNcAgrnIWYLQ">
 <link rel="canonical" href="https://defamationtracker.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,18 +153,36 @@ body {
   font-weight: 300;
 }
 .hero-byline {
-  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
   color: var(--text-dim);
   margin-bottom: 2.5rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.02);
+}
+.hero-byline .by-sep {
+  color: rgba(255,255,255,0.15);
+  font-weight: 300;
 }
 .hero-byline a {
-  color: var(--blue);
+  color: var(--gold);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.35), 0 0 20px rgba(245, 158, 11, 0.12);
+  transition: text-shadow 0.3s, color 0.3s;
 }
-.hero-byline a:hover { text-decoration: underline; }
+.hero-byline a:hover {
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.6), 0 0 30px rgba(245, 158, 11, 0.2);
+  text-decoration: underline;
+}
 .hero-stats {
   display: flex;
   gap: 3rem;
@@ -223,6 +242,8 @@ nav a {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   transition: color 0.3s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 nav a:hover { color: var(--red); }
 
@@ -288,19 +309,25 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin: 3rem 0;
+  align-items: start;
 }
 @media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
 .chart-box {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.5rem;
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem 1.25rem;
 }
 .chart-box h3 {
-  font-size: 1rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text);
+  margin-bottom: 1.25rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.chart-canvas-wrap {
+  position: relative;
 }
 
 /* TWEET CARDS */
@@ -478,6 +505,8 @@ h2 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .tab:hover, .tab.active {
   border-color: var(--red);
@@ -506,6 +535,94 @@ footer p { max-width: 600px; margin: 0 auto 0.5rem; }
 /* COUNTER ANIM */
 .count-up { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
 .count-up.visible { opacity: 1; transform: translateY(0); }
+
+/* HANDLE LINK (glowing red @mention) */
+.handle-link {
+  color: var(--red);
+  text-decoration: none;
+  font-weight: 500;
+  text-shadow: 0 0 8px var(--red-glow), 0 0 20px rgba(220, 38, 38, 0.15);
+  transition: text-shadow 0.3s, color 0.3s;
+}
+.handle-link:hover {
+  color: #f87171;
+  text-shadow: 0 0 12px rgba(220, 38, 38, 0.6), 0 0 30px rgba(220, 38, 38, 0.25);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   MOBILE / iPHONE
+   ========================================================= */
+
+/* iOS Safari viewport: 100vh includes the collapsing toolbar,
+   causing the hero to be taller than the visible screen.
+   100svh uses the small (stable) viewport height instead.    */
+.hero {
+  min-height: 100svh;
+}
+
+/* Sticky nav: account for iPhone notch / Dynamic Island
+   and landscape safe-area on the sides.                     */
+nav {
+  padding-left: max(2rem, env(safe-area-inset-left));
+  padding-right: max(2rem, env(safe-area-inset-right));
+}
+
+/* Footer home-bar clearance                                  */
+footer {
+  padding-bottom: max(3rem, calc(1.5rem + env(safe-area-inset-bottom)));
+}
+
+@media (max-width: 768px) {
+  /* --- Section spacing ------------------------------------ */
+  section { padding: 3rem 1.25rem; }
+
+  /* --- Nav: horizontal scroll instead of multi-line wrap -- */
+  nav {
+    justify-content: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+  nav::-webkit-scrollbar { height: 0; }
+  nav a {
+    /* 44px tall tap target; flex-shrink keeps items from squishing */
+    flex-shrink: 0;
+    padding: 0.75rem 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+  }
+
+  /* --- Hero stats ----------------------------------------- */
+  .hero-stats { gap: 1.5rem; }
+  .hero-stat .num { font-size: 2rem; }
+
+  /* --- Smoking-gun callout boxes -------------------------- */
+  .smoking-gun { padding: 1.25rem; }
+
+  /* --- Filter tabs: 44px touch target -------------------- */
+  .tab {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+  }
+
+  /* --- Tweet "view post" links: easier to tap ------------- */
+  .tweet-link {
+    display: inline-block;
+    padding: 0.5rem 0;
+    min-height: 44px;
+    line-height: 44px;
+  }
+
+  /* --- Stat grid: 2-col on small screens ------------------- */
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+}
 </style>
 <link rel="stylesheet" href="page-local.css">
 </head>
@@ -515,8 +632,8 @@ footer p { max-width: 600px; margin: 0 auto 0.5rem; }
 <div class="hero">
   <div class="hero-badge">Investigation</div>
   <h1>The <span>Smear Machine</span></h1>
-  <p class="subtitle">How @ProjectConstitu built a 273,000-follower empire on provably false accusations against Erika Kirk and Turning Point USA... one "BOMBSHELL" at a time.</p>
-  <p class="hero-byline">By Apple Lamps &middot; <a href="https://x.com/lamps_apple" target="_blank" rel="noopener">@lamps_apple</a></p>
+  <p class="subtitle">How <a href="https://x.com/ProjectConstitu" target="_blank" rel="noopener" class="handle-link">@ProjectConstitu</a> built a 273,000-follower empire on provably false accusations against Erika Kirk and Turning Point USA... one "BOMBSHELL" at a time.</p>
+  <p class="hero-byline">By Apple Lamps <span class="by-sep">|</span> <a href="https://x.com/lamps_apple" target="_blank" rel="noopener">@lamps_apple</a></p>
   <div class="hero-stats">
     <div class="hero-stat"><span class="num" data-count="1541">0</span><span class="label">Posts Analyzed</span></div>
     <div class="hero-stat"><span class="num" data-count="292">0</span><span class="label">Flagged Defamatory</span></div>
@@ -549,8 +666,18 @@ footer p { max-width: 600px; margin: 0 auto 0.5rem; }
     <div class="stat-card count-up"><div class="big">45</div><div class="desc">posts connecting targets to Epstein sex trafficking</div></div>
   </div>
   <div class="chart-row">
-    <div class="chart-box"><h3>Posts Flagged by Category</h3><canvas id="catChart"></canvas></div>
-    <div class="chart-box"><h3>Posts Flagged by Target</h3><canvas id="targetChart"></canvas></div>
+    <div class="chart-box">
+      <h3>Posts Flagged by Category</h3>
+      <div class="chart-canvas-wrap">
+        <canvas id="catChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <h3>Posts Flagged by Target</h3>
+      <div class="chart-canvas-wrap">
+        <canvas id="targetChart"></canvas>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -731,7 +858,6 @@ const ERIKA_POSTS = [
   {date:"2026-03-10",eng:"382.5K",text:"BOMBSHELL: TPUSA Forced to CANCEL Erika Kirk Speaking Events Over MASSIVE Backlash \u2014 Erika's DOWNFALL Has Begun...",url:"https://x.com/ProjectConstitu/status/2031182973442064786",cats:["Criminal Accusations"],legal:"Celebrates the cancelation of a grieving widow's public appearances as a victory."},
   {date:"2026-03-06",eng:"5,126 likes",text:"BUSTED: Erika Kirk's ENTIRE College Story is a LIE \u2014 NO Double Major, NO Summa Cum Laude AND Her and Tyler Bowyer KNEW Each Other Since 2012!",url:"https://x.com/ProjectConstitu/status/2029726153779360252",cats:["Professional/Credential Attacks"],legal:"If these academic claims are true, this is provably false defamation of professional reputation."},
   {date:"2026-03-09",eng:"6,255 likes",text:"VIRAL: The Spell is BREAKING... Comedians Like Tim Dillon EXPOSE Erika Kirk as Charlie's HANDLER & Executioner!",url:"https://x.com/ProjectConstitu/status/2031155167979008379",cats:["Murder/Assassination Conspiracy","Personal/Sexual Attacks"],legal:"Calls Erika Kirk 'Charlie's executioner' \u2014 a direct accusation of murder."},
-],
 // ===== NEW POSTS (Sep-Dec 2025 expansion) =====
   {date:"2025-10-26T18:56Z",eng:"2M",text:"🚨FROM SIDEKICK TO SUCCESSOR IN 6 WEEKS: Was Mikey McCoy Groomed to Replace Charlie Kirk 🤔Footage Shows McCoy Flee the Scene Was It All Planned A Disturbing Timeline: According to a reliable source Little Mikey McCoy was being positioned to succeed Charlie Kirk in the weeks lea...",url:"https://x.com/ProjectConstitu/status/1982521661464490168",cats:["Sex Trafficking/Epstein"]},
   {date:"2025-12-10T21:54Z",eng:"1.5M",text:"🚨PSYOP CONFIRMED: I JUST PULLED THE RECEIPTS EVERY $7K-CLUB SHILL GOT THE EXACT SAME ANTI-CANDACE SCRIPT IN THE LAST 2 HOURS Go look at your timeline right now. Every single blue-check conservative influencer who normally cant agree on pizza toppings is suddenly posting the id...",url:"https://x.com/ProjectConstitu/status/1998873866161029217",cats:["Murder/Assassination Conspiracy"]},
@@ -768,7 +894,6 @@ const TPUSA_POSTS = [
   {date:"2026-03-04",eng:"2,183 likes",text:"MASSIVE BOMBSHELL: Erika Kirk, Tyler Bowyer, and Jeffrey Epstein's Paths All Intersect In ROMANIA At A Romania MODELING Agency \u2014 Did Erika Kirk and Tyler Bowyer Actually Meet While TRAFFICKING Children In Romania?",url:"https://x.com/ProjectConstitu/status/2028995586012131437",cats:["Sex Trafficking/Epstein"],legal:"Directly asks whether two named individuals met while trafficking children. Defamation per se."},
   {date:"2025-10-06",eng:"362K",text:"MIND-BLOWING THEORY: Was TPUSA's Security Chief Dan Flood BLACKMAILED into Helping Assassinate Charlie Kirk to Bury His DARK SECRETS...",url:"https://x.com/ProjectConstitu/status/1975065614801584327",cats:["Murder/Assassination Conspiracy"],legal:"Accuses Dan Flood of being blackmailed into participating in assassination. Labels it a 'theory' but presents detailed factual claims."},
   {date:"2026-03-27",eng:"132 likes",text:"Rick Cutler Also Has His Own Child Trafficking Non Profit Too. Very ODD that everyone we have been investigating in this Charlie Kirk Assassination Investigation Is Connected To Child Trafficking Charities. This is NOT Normal People.",url:"https://x.com/ProjectConstitu/status/2037465682791547055",cats:["Sex Trafficking/Epstein"],legal:"Implies Rick Cutler uses a nonprofit as cover for child trafficking through guilt-by-association."},
-],
 // ===== NEW POSTS (Sep-Dec 2025 expansion) =====
   {date:"2025-12-06T19:15Z",eng:"2.6M",text:"🚨 MASSIVE UPDATE: The Marseille Hat Conspiracy Just Got DEEPER French Foreign Legion Assassin Ties EXPOSED 😱🔥 If you thought the French Legion soldier lurking 10ft from Charlie Kirk was wild. buckle up. Shoutout to @GoingStrategic (FOLLOW HIM) who dug HOURS into this rabbit ho...",url:"https://x.com/ProjectConstitu/status/1997384413139890264",cats:["Murder/Assassination Conspiracy"]},
   {date:"2025-12-02T22:52Z",eng:"1.8M",text:"🚨EXPLOSIVE BOMBSHELL: Candace Owens CONNECTS Charlie Kirks Assassination to a BILLION-DOLLAR DuPont Deal- TPUSA Insider's IMPLICATED Shes now publicly naming the mysterious French-American billionaire donor that multiple Turning Point USA insiders swear got an immediate phone ...",url:"https://x.com/ProjectConstitu/status/1995989523570856171",cats:["Murder/Assassination Conspiracy"]},
@@ -871,24 +996,6 @@ function renderTimeline() {
     { date: "Dec 19, 2025", text: "Claims Erika Kirk, Brian Harpole & Mark Amodei 'CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT.' (1.1M engagements)" },
     { date: "Dec 20, 2025", text: "Claims Charlie Kirk was 'ASSASSINATED BY DRONE from FORT HUACHUCA' with Erika's family ties to the base. (402K engagements)" },
     { date: "Dec 22, 2025", text: "Declares 'Erika Kirk Is So COOKED' and threatens to 'nail her ass to the wall' for involvement in conspiracy. (148K engagements)" },
-    { date: "Jan 2, 2026 at Utah Valley University during a TPUSA event." },
-    { date: "Sept 20, 2025", text: "@ProjectConstitu publishes 'BOMBSHELL: MIND-BLOWING Twist' claiming the shot came from a 'UTILITY SHAFT BEHIND HIM.' (7.6M engagements)" },
-    { date: "Oct 1, 2025", text: "Claims 'New Video Evidence Suggests Shot Fired FROM INSIDE the Tent.' (13.9M engagements)" },
-    { date: "Oct 4, 2025", text: "Claims 'NEW CAMERA ANGLE BLOWS OPEN CHARLIE KIRK SHOOTING' with shooter hiding behind tent. (13.6M engagements)" },
-    { date: "Oct 24, 2025", text: "Claims Erika Kirk and Candace Owens are in a 'SECRET ALLIANCE' post-assassination. (158K engagements)" },
-    { date: "Oct 25, 2025", text: "Accuses Pastor Rob McCoy of 'CAUGHT LYING About His Son.' (5.2M engagements)" },
-    { date: "Oct 26, 2025", text: "Asks if 'Mikey McCoy Was Groomed to Replace Charlie Kirk' and 'Flee the Scene.' (2M engagements)" },
-    { date: "Nov 4, 2025", text: "Claims TPUSA's Blake Neff's 'Backseat Exit Minutes Before Charlie Was Assassinated' is suspicious. (916K engagements)" },
-    { date: "Nov 6, 2025", text: "Accuses Erika Kirk of pointing finger at wrong person while 'Buying the FBI Story Hook Line & Sinker.' (94K engagements)" },
-    { date: "Nov 18, 2025", text: "Claims 'MYSTERIOUS PRIVATE JET' of TPUSA donor flew weird route morning of assassination. (1.7M engagements)" },
-    { date: "Dec 2, 2025", text: "Connects assassination to 'BILLION-DOLLAR DuPont Deal' implicating TPUSA insiders. (1.8M engagements)" },
-    { date: "Dec 6, 2025", text: "Asks if Erika Kirk is 'Actually GRIEVING Or Just The New STAR of TPUSA Grief Porn.' (101K engagements)" },
-    { date: "Dec 10, 2025", text: "Claims 'CANDACE OWENS JUST ENDED ERIKA KIRK ON LIVE PODCAST.' (1.2M engagements)" },
-    { date: "Dec 12, 2025", text: "Claims Erika Kirk 'CAUGHT LYING On National TV About Charlie's FINAL TEXT.' (158K engagements)" },
-    { date: "Dec 19, 2025", text: "Claims Erika Kirk, Brian Harpole & Mark Amodei 'CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT.' (1.1M engagements)" },
-    { date: "Dec 20, 2025", text: "Claims Charlie Kirk was 'ASSASSINATED BY DRONE from FORT HUACHUCA' with Erika's family ties to the base. (402K engagements)" },
-    { date: "Dec 22, 2025", text: "Declares 'Erika Kirk Is So COOKED' and threatens to 'nail her ass to the wall' for involvement in conspiracy. (148K engagements)" },
-    { date: "Jan 2, 2026 at Utah Valley University during a TPUSA event." },
     { date: "Oct 6, 2025", text: "@ProjectConstitu publishes theory that TPUSA Security Chief Dan Flood was 'BLACKMAILED into helping assassinate Charlie Kirk.' (362K engagements)" },
     { date: "Dec 10, 2025", text: "Posts that Erika Kirk went 'FULL DEEP-STATE SCRIPT' on Fox News, declaring her part of the 'COVER-UP.' (832K engagements)" },
     { date: "Jan 2, 2026", text: "Claims Erika Kirk 'Is a ROTHSTEIN' with family ties to Epstein. (1.2M engagements)" },
@@ -917,28 +1024,72 @@ function renderTimeline() {
 
 // ========== CHARTS ==========
 function renderCharts() {
+  const isMobile = window.innerWidth <= 768;
+
+  const catColors = ["#ef4444","#eab308","#f97316","#8b5cf6","#f43f5e","#ec4899","#06b6d4","#22c55e"];
+  const catLabelsFull = ["Murder/Assassination","Lying/Cover-Up","Sex Trafficking","Intelligence Agency","Criminal Accusations","Personal/Sexual","Professional","Financial Fraud"];
+  const catLabelsShort = ["Murder","Lying","Trafficking","Intel","Criminal","Personal","Professional","Financial"];
   const catData = {
-    labels: ["Murder/Assassination", "Lying/Cover-Up", "Sex Trafficking", "Intelligence Agency", "Criminal Accusations", "Personal/Sexual", "Professional", "Financial Fraud"],
+    labels: isMobile ? catLabelsShort : catLabelsFull,
     datasets: [{
       data: [177, 102, 50, 52, 45, 23, 10, 12],
-      backgroundColor: ["#ef4444", "#eab308", "#f97316", "#8b5cf6", "#f43f5e", "#ec4899", "#06b6d4", "#22c55e"],
+      backgroundColor: catColors.map(c => c + "cc"),
+      hoverBackgroundColor: catColors,
       borderWidth: 0,
       borderRadius: 4,
+      barThickness: isMobile ? 14 : 18,
     }]
   };
+  const valueLabelPlugin = {
+    id: "valueLabels",
+    afterDatasetsDraw(chart) {
+      const {ctx, data, scales: {x}} = chart;
+      ctx.save();
+      data.datasets[0].data.forEach((val, i) => {
+        const bar = chart.getDatasetMeta(0).data[i];
+        const xPos = Math.min(bar.x + 6, x.right - 26);
+        ctx.fillStyle = "#9ca3af";
+        ctx.font = "600 " + (isMobile ? "9" : "10") + "px Inter,system-ui,sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(val, xPos, bar.y);
+      });
+      ctx.restore();
+    }
+  };
+
+  const catWrap = document.getElementById("catChart").parentElement;
+  if (isMobile) catWrap.style.height = "240px";
+
   new Chart(document.getElementById("catChart"), {
     type: "bar",
     data: catData,
+    plugins: [valueLabelPlugin],
     options: {
       indexAxis: "y",
       responsive: true,
-      plugins: { legend: { display: false } },
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: { label: ctx => `  ${ctx.parsed.x} posts` }
+      }},
       scales: {
-        x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#9ca3af" } },
-        y: { grid: { display: false }, ticks: { color: "#e5e5e5", font: { size: 11 } } }
-      }
+        x: {
+          grid: { color: "rgba(255,255,255,0.04)" },
+          ticks: { color: "#6b7280", font: { size: isMobile ? 9 : 10 } },
+          border: { display: false }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: "#d1d5db", font: { size: isMobile ? 10 : 11 }, padding: 2 },
+          border: { display: false }
+        }
+      },
+      layout: { padding: { right: 30 } }
     }
   });
+
+  const targetWrap = document.getElementById("targetChart").parentElement;
+  if (isMobile) targetWrap.style.height = "300px";
 
   const targetData = {
     labels: ["Erika Kirk", "TPUSA", "Israel/Mossad", "A. Kolvet", "T. Bowyer", "B. Neff", "D. Flood", "J. Hammer"],
@@ -953,8 +1104,16 @@ function renderCharts() {
     data: targetData,
     options: {
       responsive: true,
+      maintainAspectRatio: false,
+      cutout: "62%",
       plugins: {
-        legend: { position: "right", labels: { color: "#e5e5e5", font: { size: 11 }, padding: 12 } }
+        legend: {
+          position: isMobile ? "bottom" : "right",
+          labels: { color: "#d1d5db", font: { size: 11 }, padding: 10, boxWidth: 10, boxHeight: 10 }
+        },
+        tooltip: {
+          callbacks: { label: ctx => `  ${ctx.label}: ${ctx.parsed} posts` }
+        }
       }
     }
   });
