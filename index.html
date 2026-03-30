@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Smear Machine: @ProjectConstitu Analysis | Defamation Tracker</title>
+<meta name="description" content="Independent data investigation: 1,541 posts from @ProjectConstitu analyzed for a pattern of potentially defamatory claims against Erika Kirk and Turning Point USA. Charts, timeline, and legal context. Not legal advice.">
+<meta name="author" content="Apple Lamps">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://defamationtracker.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Defamation Tracker">
+<meta property="og:title" content="The Smear Machine: Documenting @ProjectConstitu's Defamation Campaign">
+<meta property="og:description" content="Independent data investigation: 1,541 posts from @ProjectConstitu analyzed for a pattern of potentially defamatory claims against Erika Kirk and Turning Point USA. Not legal advice.">
+<meta property="og:url" content="https://defamationtracker.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://defamationtracker.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Defamation Tracker — editorial banner with dark background and crimson accent typography">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://defamationtracker.com/og.jpg">
+<meta name="twitter:title" content="The Smear Machine: @ProjectConstitu investigation | Defamation Tracker">
+<meta name="twitter:description" content="1,541 posts analyzed: documented patterns of potentially defamatory claims vs. Erika Kirk and TPUSA. Data, timeline, and legal context.">
+<meta name="twitter:creator" content="@lamps_apple">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://defamationtracker.com/#website",
+      "name": "Defamation Tracker",
+      "url": "https://defamationtracker.com/",
+      "description": "Documenting and analyzing publicly available social posts for patterns of potentially defamatory content.",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://defamationtracker.com/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://defamationtracker.com/#organization",
+      "name": "Defamation Tracker",
+      "url": "https://defamationtracker.com/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://defamationtracker.com/#webpage",
+      "url": "https://defamationtracker.com/",
+      "name": "The Smear Machine: Documenting @ProjectConstitu's Defamation Campaign",
+      "description": "Independent data investigation of @ProjectConstitu: post-level analysis, engagement metrics, and legal context regarding claims about Erika Kirk and Turning Point USA. Not legal advice.",
+      "isPartOf": { "@id": "https://defamationtracker.com/#website" },
+      "dateModified": "2026-03-29",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Article",
+      "headline": "The Smear Machine: Documenting @ProjectConstitu's Defamation Campaign",
+      "description": "Data-driven review of 1,541 X posts from @ProjectConstitu (Oct 2025–Mar 2026), including top engaged posts, categories, and legal framing. Not legal advice.",
+      "author": {
+        "@type": "Person",
+        "name": "Apple Lamps",
+        "url": "https://x.com/lamps_apple",
+        "sameAs": ["https://x.com/lamps_apple"]
+      },
+      "datePublished": "2026-03-29",
+      "dateModified": "2026-03-29",
+      "image": "https://defamationtracker.com/og.jpg",
+      "mainEntityOfPage": { "@id": "https://defamationtracker.com/#webpage" },
+      "isAccessibleForFree": true
+    }
+  ]
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a28;
+  --red: #dc2626;
+  --red-dim: #991b1b;
+  --red-glow: rgba(220, 38, 38, 0.3);
+  --gold: #f59e0b;
+  --blue: #3b82f6;
+  --text: #e5e5e5;
+  --text-dim: #9ca3af;
+  --border: #2a2a3a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  background: radial-gradient(ellipse at center, rgba(220,38,38,0.08) 0%, transparent 70%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.01) 50px, rgba(255,255,255,0.01) 51px);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid var(--red);
+  color: var(--red);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  border-radius: 2px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  max-width: 900px;
+}
+.hero h1 span { color: var(--red); }
+.hero .subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--text-dim);
+  max-width: 700px;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+.hero-byline {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.hero-byline a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+.hero-byline a:hover { text-decoration: underline; }
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat .num {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--red);
+  display: block;
+}
+.hero-stat .label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* SCROLL INDICATOR */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  animation: bounce 2s infinite;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.95);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+}
+nav a:hover { color: var(--red); }
+
+/* SECTIONS */
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.5rem;
+}
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+.lead {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 750px;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+/* STAT GRID */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+.stat-card:hover { border-color: var(--red); }
+.stat-card .big {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--red);
+}
+.stat-card .desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+}
+
+/* CHART CONTAINER */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+@media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+.chart-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.chart-box h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* TWEET CARDS */
+.tweet-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.tweet-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.tweet-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 0 30px var(--red-glow);
+}
+.tweet-card.retracted {
+  border-color: var(--red);
+  box-shadow: 0 0 20px var(--red-glow);
+}
+.tweet-card.retracted::before {
+  content: 'RETRACTED';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: var(--red);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  padding: 0.2rem 0.8rem;
+  border-radius: 2px;
+}
+.tweet-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tweet-date {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.tweet-engagement {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--red);
+}
+.tweet-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+.tweet-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+.cat-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.cat-tag.murder { color: #ef4444; border-color: #7f1d1d; background: rgba(239,68,68,0.1); }
+.cat-tag.trafficking { color: #f97316; border-color: #7c2d12; background: rgba(249,115,22,0.1); }
+.cat-tag.intel { color: #8b5cf6; border-color: #4c1d95; background: rgba(139,92,246,0.1); }
+.cat-tag.lying { color: #eab308; border-color: #713f12; background: rgba(234,179,8,0.1); }
+.cat-tag.personal { color: #ec4899; border-color: #831843; background: rgba(236,72,153,0.1); }
+.cat-tag.criminal { color: #f43f5e; border-color: #881337; background: rgba(244,63,94,0.1); }
+.cat-tag.credential { color: #06b6d4; border-color: #164e63; background: rgba(6,182,212,0.1); }
+.cat-tag.financial { color: #22c55e; border-color: #14532d; background: rgba(34,197,94,0.1); }
+.tweet-link {
+  font-size: 0.8rem;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+.tweet-link:hover { text-decoration: underline; }
+
+/* LEGAL NOTE */
+.legal-note {
+  background: rgba(220,38,38,0.05);
+  border-left: 3px solid var(--red);
+  padding: 1rem 1.2rem;
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-radius: 0 4px 4px 0;
+}
+.legal-note strong { color: var(--red); }
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 3rem 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--red), var(--red-dim), transparent);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.35rem;
+  top: 0.5rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red-glow);
+}
+.timeline-date {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 0.3rem;
+}
+.timeline-text {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* SMOKING GUN */
+.smoking-gun {
+  background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(220,38,38,0.03));
+  border: 1px solid var(--red-dim);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 3rem 0;
+}
+.smoking-gun h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+/* FILTER TABS */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.tab {
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg2);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.tab:hover, .tab.active {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(220,38,38,0.08);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+footer p { max-width: 600px; margin: 0 auto 0.5rem; }
+
+/* DIVIDER */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 0;
+}
+
+/* COUNTER ANIM */
+.count-up { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+.count-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+<link rel="stylesheet" href="page-local.css">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Investigation</div>
+  <h1>The <span>Smear Machine</span></h1>
+  <p class="subtitle">How @ProjectConstitu built a 273,000-follower empire on provably false accusations against Erika Kirk and Turning Point USA... one "BOMBSHELL" at a time.</p>
+  <p class="hero-byline">By Apple Lamps &middot; <a href="https://x.com/lamps_apple" target="_blank" rel="noopener">@lamps_apple</a></p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num" data-count="1541">0</span><span class="label">Posts Analyzed</span></div>
+    <div class="hero-stat"><span class="num" data-count="292">0</span><span class="label">Flagged Defamatory</span></div>
+    <div class="hero-stat"><span class="num" data-count="127">0</span><span class="label">Targeting Erika Kirk</span></div>
+    <div class="hero-stat"><span class="num" data-count="148">0</span><span class="label">Targeting TPUSA</span></div>
+  </div>
+  <div class="scroll-hint">SCROLL TO BEGIN &#8595;</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#smoking-gun">The Retraction</a>
+  <a href="#erika">Erika Kirk</a>
+  <a href="#tpusa">TPUSA</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#data">The Data</a>
+  <a href="#legal">Legal Analysis</a>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-label">The Numbers</div>
+  <h2>One in Five Posts Crosses the Line</h2>
+  <p class="lead">We analyzed 1,056 original posts from @ProjectConstitu spanning October 2025 through March 2026. The account's operator runs a systematic defamation campaign disguised as "investigation." Here's what the data shows.</p>
+  <div class="stat-grid">
+    <div class="stat-card count-up"><div class="big">17.8%</div><div class="desc">of all posts flagged as potentially defamatory</div></div>
+    <div class="stat-card count-up"><div class="big">11.6M</div><div class="desc">engagements on the single most defamatory tweet</div></div>
+    <div class="stat-card count-up"><div class="big">106</div><div class="desc">posts alleging murder/assassination conspiracy</div></div>
+    <div class="stat-card count-up"><div class="big">45</div><div class="desc">posts connecting targets to Epstein sex trafficking</div></div>
+  </div>
+  <div class="chart-row">
+    <div class="chart-box"><h3>Posts Flagged by Category</h3><canvas id="catChart"></canvas></div>
+    <div class="chart-box"><h3>Posts Flagged by Target</h3><canvas id="targetChart"></canvas></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SMOKING GUN -->
+<section id="smoking-gun">
+  <div class="section-label">Critical Evidence</div>
+  <h2>The Wiretap That Never Was</h2>
+  <p class="lead">On March 14, 2026, @ProjectConstitu published the most viral tweet in the entire dataset. It was false. He admitted it. Here's the sequence.</p>
+
+  <div class="smoking-gun">
+    <h3>Step 1: The False Claim</h3>
+    <div class="tweet-card retracted">
+      <div class="tweet-meta">
+        <span class="tweet-date">March 14, 2026</span>
+        <span class="tweet-engagement">11.6M engagements</span>
+      </div>
+      <div class="tweet-text">"THE SMOKING GUN: Leaked DOJ Wiretap Audio Captures Erika Kirk Scheduling Underage Girls for Epstein. I have been sent a bombshell audio file, and I have verified its authenticity. This is not a rumor. This is not a theory."</div>
+      <div class="legal-note"><strong>He claimed to have "verified" an audio file identifying Erika Kirk.</strong> He had not. The voice belonged to someone else entirely.</div>
+    </div>
+  </div>
+
+  <div class="smoking-gun smoking-gun--neutral">
+    <h3>Step 2: The Doubling Down</h3>
+    <div class="tweet-card">
+      <div class="tweet-meta">
+        <span class="tweet-date">March 14, 2026 (hours later)</span>
+        <span class="tweet-engagement">7,036 likes</span>
+      </div>
+      <div class="tweet-text">"FOLLOW-UP: The Erika Kirk Audio is REAL, and the context is even more DAMNING than we Initially Thought."</div>
+      <div class="legal-note">Before correcting, he <strong>amplified</strong> the false claim to his audience.</div>
+    </div>
+  </div>
+
+  <div class="smoking-gun smoking-gun--correction">
+    <h3>Step 3: The Quiet Correction</h3>
+    <div class="tweet-card">
+      <div class="tweet-meta">
+        <span class="tweet-date">March 14, 2026 (later)</span>
+        <span class="tweet-engagement tweet-engagement--accent">2,081 likes (5% of original)</span>
+      </div>
+      <div class="tweet-text">"CORRECTION: I would like to issue a correction regarding my previous post where I claimed the audio featured Erika Kirk. Upon further verification, the individual in the recording is actually Haley Robson."</div>
+      <div class="legal-note legal-note--correction"><strong>The math is damning:</strong> 38,582 people liked the false accusation. Only 2,081 saw the correction. Tens of thousands of people still believe Erika Kirk was recorded scheduling underage girls for Epstein. She wasn't.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ERIKA KIRK -->
+<section id="erika">
+  <div class="section-label">Primary Target</div>
+  <h2>105 Defamatory Posts Against Erika Kirk</h2>
+  <p class="lead">A grieving widow turned into a villain. The account accuses Erika Kirk of sex trafficking, murder conspiracy, CIA operations, satanic rituals, fabricated credentials, and more... across every category of defamation per se.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card count-up"><div class="big">36</div><div class="desc">Murder / Assassination Conspiracy</div></div>
+    <div class="stat-card count-up"><div class="big">29</div><div class="desc">Sex Trafficking / Epstein</div></div>
+    <div class="stat-card count-up"><div class="big">23</div><div class="desc">Lying / Cover-Up</div></div>
+    <div class="stat-card count-up"><div class="big">14</div><div class="desc">Intelligence Agency Accusations</div></div>
+  </div>
+
+  <div class="tabs" id="erika-tabs">
+    <div class="tab active" data-filter="all">All (Top 15)</div>
+    <div class="tab" data-filter="Sex Trafficking/Epstein">Epstein</div>
+    <div class="tab" data-filter="Murder/Assassination Conspiracy">Murder</div>
+    <div class="tab" data-filter="Intelligence Agency Accusations">CIA/Mossad</div>
+    <div class="tab" data-filter="Personal/Sexual Attacks">Personal</div>
+    <div class="tab" data-filter="Lying/Cover-Up">Cover-Up</div>
+  </div>
+  <div class="tweet-grid" id="erika-tweets"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TPUSA -->
+<section id="tpusa">
+  <div class="section-label">Secondary Target</div>
+  <h2>86 Defamatory Posts Against TPUSA</h2>
+  <p class="lead">TPUSA is consistently labeled a "syndicate" and "criminal enterprise." Specific executives are accused of cover-ups, fabricating alibis, child trafficking, and defrauding elderly donors through mail campaigns.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card count-up"><div class="big">38</div><div class="desc">Murder / Assassination Conspiracy</div></div>
+    <div class="stat-card count-up"><div class="big">21</div><div class="desc">Lying / Cover-Up</div></div>
+    <div class="stat-card count-up"><div class="big">21</div><div class="desc">Criminal Accusations</div></div>
+    <div class="stat-card count-up"><div class="big">9</div><div class="desc">Intelligence Agency</div></div>
+  </div>
+
+  <div class="tweet-grid" id="tpusa-tweets"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-label">Escalation Pattern</div>
+  <h2>A Campaign That Keeps Escalating</h2>
+  <p class="lead">The accusations grow more extreme over time. What started as criticism of TPUSA's handling of Charlie Kirk's legacy has escalated into accusations of sex trafficking, assassination conspiracy, and intelligence operations.</p>
+
+  <div class="timeline" id="timeline-content"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DATA -->
+<section id="data">
+  <div class="section-label">Full Dataset</div>
+  <h2>Top 30 Most-Engaged Flagged Posts</h2>
+  <p class="lead">Every tweet below was flagged by our analysis as containing potentially defamatory content. Sorted by total engagement. Click any link to view the original post.</p>
+
+  <div class="tweet-grid" id="all-tweets"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LEGAL -->
+<section id="legal">
+  <div class="section-label">Legal Exposure</div>
+  <h2>Why This Matters Legally</h2>
+  <p class="lead">A brief overview of the defamation exposure this campaign creates. This is informational analysis, not legal advice.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card count-up stat-card--br-red">
+      <div class="big stat-card__title-legal">Defamation Per Se</div>
+      <div class="desc">All 4 categories met: criminal conduct, professional harm, sexual misconduct, moral turpitude. Damages presumed without proof of specific monetary loss.</div>
+    </div>
+    <div class="stat-card count-up stat-card--br-gold">
+      <div class="big stat-card__title-legal--gold">Actual Malice</div>
+      <div class="desc">The wiretap retraction proves the account claimed "verification" it never performed. The cease & desist defiance shows continued intentional publication.</div>
+    </div>
+    <div class="stat-card count-up stat-card--br-blue">
+      <div class="big stat-card__title-legal--blue">Massive Reach</div>
+      <div class="desc">273K followers. Top 30 flagged posts exceeded 40M engagements combined. The false Epstein claim alone hit 11.6M.</div>
+    </div>
+    <div class="stat-card count-up stat-card--br-violet">
+      <div class="big stat-card__title-legal--violet">2 Cease & Desists</div>
+      <div class="desc">TPUSA sent at least 2 cease & desist letters. The account posted them publicly and continued escalating. This is usable as evidence of continued intentional conduct.</div>
+    </div>
+  </div>
+
+  <div class="smoking-gun smoking-gun--legal-aside">
+    <h3 class="smoking-gun__title--plain">The "Allegedly" Defense Won't Work</h3>
+    <p class="smoking-gun__lead">The account occasionally uses "ALLEGEDLY" or frames accusations as questions ("Was She Hiding In An Office For a CIA Front Company?"). Courts have consistently held that this framing does not immunize defamatory content. Under the "totality of circumstances" test, if the overall impression to a reasonable reader is factual assertion, hedging language provides no protection. When the surrounding text uses "BOMBSHELL," "SMOKING GUN," "PROVES," "DESTROYED," and "EXPOSED"... the overall impression is overwhelmingly one of factual assertion, not speculation.</p>
+  </div>
+</section>
+
+<footer>
+  <p>This site documents publicly available posts from the X account @ProjectConstitu for the purpose of demonstrating a pattern of potentially defamatory content targeting Erika Kirk and Turning Point USA.</p>
+  <p>Analysis conducted March 29, 2026. 1,541 posts analyzed via X API v2 and LunarCrush. This is not legal advice.</p>
+  <p class="footer__fine-print">&copy; 2026</p>
+</footer>
+
+<script>
+// ========== DATA ==========
+const DATA = {
+  erika_top: [],
+  tpusa_top: [],
+  all_top: [],
+  categories: {},
+  targets: {}
+};
+
+// We'll inline the data from our analysis
+const ERIKA_POSTS = [
+  {date:"2026-03-14",eng:"11.6M",text:"THE SMOKING GUN: Leaked DOJ Wiretap Audio Captures Erika Kirk Scheduling Underage Girls for Epstein. I have been sent a bombshell audio file, and I have verified its authenticity. This is not a rumor. This is not a theory. This is a recorded phone call from the DOJ's own website...",url:"https://x.com/ProjectConstitu/status/2032664550525268015",cats:["Sex Trafficking/Epstein"],retracted:true,legal:"Later admitted the voice was Haley Robson, not Erika Kirk. 38K likes on the false claim; 2K on the correction."},
+  {date:"2026-03-26",eng:"6.8M",text:"EXPOSED: Newly RESURFACED Video of Erika Kirk in a Bathrobe Rapping In BED With Her Then Roommate Sydney Stahl Give Off HUGE Lesbian Vibes. A newly resurfaced 2018 video just dropped showing Erika Kirk half-naked in a bathrobe, rapping alongside her then roommate and former Miss North Carolina...",url:"https://x.com/ProjectConstitu/status/2037267819503517932",cats:["Personal/Sexual Attacks"],legal:"Designed to attack her reputation within conservative audiences by insinuating her sexuality."},
+  {date:"2026-02-26",eng:"5M",text:"BOMBSHELL: Candace Owens Just UNCOVERED Erika Kirk's SECRET Early Years And Its WILDER Than Anyone Expected. Was Erika BORN A MALE...",url:"https://x.com/ProjectConstitu/status/2026813316039848010",cats:["Personal/Sexual Attacks","Intelligence Agency Accusations"],legal:"Asks whether Erika Kirk was 'born male' to 273K followers. Defamatory personal attack."},
+  {date:"2026-03-25",eng:"3.5M",text:"LEAKED TAPE: Erika Kirk's UNREGISTERED Meeting Triggers FORMAL Investigation and Massive LAWSUIT. While TPUSA was allegedly applying backroom pressure to get events CANCELED at ASU, Erika Kirk snuck onto campus to hold a secret, UNREGISTERED meeting...",url:"https://x.com/ProjectConstitu/status/2036885930917978177",cats:["Lying/Cover-Up"],legal:"Claims ASU is launching a \"formal investigation\" based on the meeting. 13,742 likes."},
+  {date:"2026-01-08",eng:"2.1M",text:"SHOCKING: Erika Kirk EXPOSED in Secret CIA-Linked Doc Briefing Officials on Grid-Wiping EMP Attacks. Mom's Military EMPIRE Involved...",url:"https://x.com/ProjectConstitu/status/2009230091415417113",cats:["Intelligence Agency Accusations"],legal:"Accuses Erika Kirk of being linked to CIA operations and EMP attack briefings."},
+  {date:"2026-02-25",eng:"1.7M",text:"SHOCKING: THE MOMENT Trump CALLED OUT Erika Kirk's Name Watch Her REACTION. Trump pauses during the State of the Union, looks straight toward the gallery, and calls her out by name...",url:"https://x.com/ProjectConstitu/status/2026501226708283797",cats:["Murder/Assassination Conspiracy"],legal:"Frames a routine SOTU moment as evidence of guilt."},
+  {date:"2026-01-02",eng:"1.2M",text:"SHOCKING: Erika Kirk Is a ROTHSTEIN. The Family Ties That Could BLOW the Charlie Kirk Case WIDE OPEN. Erika Kirk's hidden family connections to the Rothstein name...",url:"https://x.com/ProjectConstitu/status/2007004227948745180",cats:["Sex Trafficking/Epstein","Criminal Accusations"],legal:"Uses family name association to imply criminal connections. Guilt by ancestry."},
+  {date:"2026-03-17",eng:"975.9K",text:"BREAKING: Erika Kirk Went On A Shopping SPREE The Day AFTER Charlie Was Assassinated. But EVERYONE Grieves Differently Right...",url:"https://x.com/ProjectConstitu/status/2033908057382494293",cats:["Murder/Assassination Conspiracy"],legal:"Uses shopping receipts to imply lack of grief, framing her as a suspect in her husband's murder."},
+  {date:"2026-03-12",eng:"741.5K",text:"BOMBSHELL: Candace Owens Connects Erika Kirk To Apartment Building That Jeffrey Epstein Housed His Underage Victims \u2014 She Was The Point Person...",url:"https://x.com/ProjectConstitu/status/2032216044480364847",cats:["Sex Trafficking/Epstein"],legal:"Accuses Erika Kirk of being the 'point person' for Epstein's housing of underage victims."},
+  {date:"2026-01-28",eng:"474.6K",text:"FULL LEAKED AUDIO: Erika Kirk's Employee Zoom Call JUST 11 DAYS After Charlie Kirk's Assassination. Upbeat, Laughing, Bragging About Metrics...",url:"https://x.com/ProjectConstitu/status/2016461787676188754",cats:["Murder/Assassination Conspiracy"],legal:"Uses a business call tone to imply she was unbothered by her husband's death."},
+  {date:"2026-01-14",eng:"459.7K",text:"BREAKING: Unearthed 2015 Video of Erika Frantzve (Now Kirk) Interviewing Dr. Ben Carson Talking PSYOPS MANIPULATION & America's FIRST SPY Nathan Hale. CIA Connections Deepen...",url:"https://x.com/ProjectConstitu/status/2011293241870549153",cats:["Intelligence Agency Accusations"],legal:"Frames a student journalism clip as evidence of CIA training."},
+  {date:"2026-01-28",eng:"404.6K",text:"SHOCKING: Erika Kirk's FIRST Company-Wide Video Address LEAKED JUST 6 DAYS After Charlie Kirk's Assassination...",url:"https://x.com/ProjectConstitu/status/2016649479949341128",cats:["Murder/Assassination Conspiracy"],legal:"Frames routine business continuity as evidence of cold-blooded conspiracy."},
+  {date:"2026-03-10",eng:"382.5K",text:"BOMBSHELL: TPUSA Forced to CANCEL Erika Kirk Speaking Events Over MASSIVE Backlash \u2014 Erika's DOWNFALL Has Begun...",url:"https://x.com/ProjectConstitu/status/2031182973442064786",cats:["Criminal Accusations"],legal:"Celebrates the cancelation of a grieving widow's public appearances as a victory."},
+  {date:"2026-03-06",eng:"5,126 likes",text:"BUSTED: Erika Kirk's ENTIRE College Story is a LIE \u2014 NO Double Major, NO Summa Cum Laude AND Her and Tyler Bowyer KNEW Each Other Since 2012!",url:"https://x.com/ProjectConstitu/status/2029726153779360252",cats:["Professional/Credential Attacks"],legal:"If these academic claims are true, this is provably false defamation of professional reputation."},
+  {date:"2026-03-09",eng:"6,255 likes",text:"VIRAL: The Spell is BREAKING... Comedians Like Tim Dillon EXPOSE Erika Kirk as Charlie's HANDLER & Executioner!",url:"https://x.com/ProjectConstitu/status/2031155167979008379",cats:["Murder/Assassination Conspiracy","Personal/Sexual Attacks"],legal:"Calls Erika Kirk 'Charlie's executioner' \u2014 a direct accusation of murder."},
+],
+// ===== NEW POSTS (Sep-Dec 2025 expansion) =====
+  {date:"2025-10-26T18:56Z",eng:"2M",text:"🚨FROM SIDEKICK TO SUCCESSOR IN 6 WEEKS: Was Mikey McCoy Groomed to Replace Charlie Kirk 🤔Footage Shows McCoy Flee the Scene Was It All Planned A Disturbing Timeline: According to a reliable source Little Mikey McCoy was being positioned to succeed Charlie Kirk in the weeks lea...",url:"https://x.com/ProjectConstitu/status/1982521661464490168",cats:["Sex Trafficking/Epstein"]},
+  {date:"2025-12-10T21:54Z",eng:"1.5M",text:"🚨PSYOP CONFIRMED: I JUST PULLED THE RECEIPTS EVERY $7K-CLUB SHILL GOT THE EXACT SAME ANTI-CANDACE SCRIPT IN THE LAST 2 HOURS Go look at your timeline right now. Every single blue-check conservative influencer who normally cant agree on pizza toppings is suddenly posting the id...",url:"https://x.com/ProjectConstitu/status/1998873866161029217",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-10T22:26Z",eng:"1.2M",text:"🚨 CANDACE OWENS JUST ENDED ERIKA KIRK ON LIVE PODCAST: WE NOW KNOW EXACTLY WHO SHE IS @RealCandaceO held nothing back tonight: I was giving Erika the benefit of the doubt grieving widow new CEO massive transition I wanted to wait and see. Well we waited. And tonight on Fox New...",url:"https://x.com/ProjectConstitu/status/1998882110724071805",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-19T00:47Z",eng:"1.1M",text:"🚨BREAKING BOMBSHELL: Erika Kirk Brian Harpole & Mark Amodei CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT EYEWITNESS Goes Public (FULL INTERVIEW)🤯 Candace Owens just brought on a bombshell eyewitness to her podcast who accidentally stumbled into a high-level meeting ...",url:"https://x.com/ProjectConstitu/status/2001816557450584541",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-16T01:37Z",eng:"751.1K",text:"🚨SHOCKING BETRAYAL: TPUSA Breaks Erika Kirk's Agreement With Candace Hours Before The Meeting Pushing Proven LIES From SHADY Experts Further Destroying Their Credibility🐍❌ Just before Erika Kirk's private Nashville meeting with Candace Owens TPUSA hosts Blake Neff & Andrew Kol...",url:"https://x.com/ProjectConstitu/status/2000742116800999469",cats:["Lying/Cover-Up"]},
+  {date:"2025-12-19T01:01Z",eng:"448.4K",text:"🚨EXPOSED: Erika Kirk Brian Harpole & Congressman Mark Amodei Caught at Secret Fort Huachuca Meeting Day Before Charlie Kirk Assassination😱 Candace Owens just aired the most explosive eyewitness testimony yet in the Charlie Kirk assassination investigation. A credible veteran (",url:"https://x.com/ProjectConstitu/status/2001820180641382782",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-20T08:25Z",eng:"402.1K",text:"🚨BOMBSHELL: Charlie Kirk ASSASSINATED BY DRONE from FORT HUACHUCA Erika's FAMILY TIES to the Base Are EXPLOSIVE 💥 @realstewpeters just laid it all out perfectly: Fort Huachuca isn't just any military base it's the ONLY facility in the entire U.S. for unmanned aircraft (drone) ...",url:"https://x.com/ProjectConstitu/status/2002294277150478706",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-11T23:57Z",eng:"262.1K",text:"🚨BREAKING: Candace Owens Just Put Erika Kirk On BLAST: TELL ME ONE LIE I TOLD ILL WAIT Tonight Candace went full SCORCHED-EARTH on the entire PR circus: Erica Kirk says Im lying for money. Fine. Name ONE lie. Just one. Ill stop tomorrow if you can point to it. Dead silence fro...",url:"https://x.com/ProjectConstitu/status/1999267251581591748",cats:["Lying/Cover-Up"]},
+  {date:"2025-12-20T01:43Z",eng:"196.6K",text:"🚨BOMBSHELL PLOT TWIST: Mark Amodei's Staffer Is Erika Kirk's Twin Lookalike Was SHE the Mystery Woman at Fort Huachuca😲 Following up on my post about the Fort Wachuca secret meeting and Erika Kirk's possible attendance. New information has surfaced that Rep. Mark Amodei staffe...",url:"https://x.com/ProjectConstitu/status/2002193092389359658",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-16T17:22Z",eng:"168.5K",text:"🚨BREAKING: Erika Kirk Caught In Another LIE She Hid This Relationship With Cabot Phillips From Charlie Now He's Doing TPUSA Tours😱 : THERE IT IS: ERIKA Frantzve KIRK WAS DATING CABOT PHILLIPS JUST BEFORE she met CHARLIE KIRK despite claiming being single. Wayback Machine shows...",url:"https://x.com/ProjectConstitu/status/2000979943782559903",cats:["Lying/Cover-Up"]},
+  {date:"2025-12-12T02:48Z",eng:"158.7K",text:"🚨EXPOSED: Erika Kirk Just Got CAUGHT LYING On National TV About Charlies FINAL TEXT And We Have the RECEIPTS🧾 Today on @glennbeck's show Erika Kirk looked America in the eye and said: He was NOT messaging people the day before saying theyre going to kill me. I have his cell ph...",url:"https://x.com/ProjectConstitu/status/1999310251917513180",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-10-24T18:39Z",eng:"158K",text:"🚨EXPOSED: CANDACE OWENS And ERIKA KIRK Working Together In SECRET ALLIANCE🧐 You won't believe this. @iamcoachcolin drops a bombshells on the Charlie Kirk drama and exposes the secret connection between @RealCandaceO and @MrsErikaKirk post Charlie's assassination. Erika and Can...",url:"https://x.com/ProjectConstitu/status/1981792621422162189",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-07T14:18Z",eng:"157.3K",text:"🚨 EXPOSED: The Egyptian Diplomat on Charlie Kirk's Assassination Jet Meet Walid Mahmoud Abdel Nasser The Shadowy Figure Tying It ALL Together If you've been following Candace Owens' bombshell exposes on the Egyptian spy planes shadowing TPUSA events (73+ flights tracking Erika...",url:"https://x.com/ProjectConstitu/status/1997671981299233069",cats:["Murder/Assassination Conspiracy","Intelligence Agency Accusations"]},
+  {date:"2025-12-22T02:10Z",eng:"148.8K",text:"Erika Kirk Is So COOKED Now would be a good time for her to hop on one of the those Egyptian Planes and flee the country because we are so close to nailing her ass to the wall with being involved in this conspiracy to take out Charlie. The evidence and her lies are piling up. ...",url:"https://x.com/ProjectConstitu/status/2002924656714563759",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-12-16T21:47Z",eng:"133K",text:"🚨BREAKING: Erika Kirk Grabbed Charlie's Trademark DAYS After Assassination Now Cashing Millions While Attacking Candace for ",url:"https://x.com/ProjectConstitu/status/2001046614790607272",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-12T20:10Z",eng:"121.3K",text:"🚨BREAKING: Megyn Kelly CALLS OUT Ben Shapiro's Massive Lie On Stage Shapiro's Credibility in TATTERS After This Clip Ben Shapiro's recent onstage attempt to morally blackmail @megynkelly into publicly disavowing Candace Owensbased on the FALSE claim that Owens accused Erika Ki...",url:"https://x.com/ProjectConstitu/status/1988700852136140970",cats:["Lying/Cover-Up"]},
+  {date:"2025-12-13T01:44Z",eng:"116.7K",text:"🚨EXPOSED: Erika Kirk Just Spit On Charlie Kirk's Grave Rolling Out The Red Carpet (and Shabbat)For The Exact Donors Who Charlie Rejected Before His Execution😤 Charlie Kirk went to his grave refusing massive Zionist donor money because they were trying to morally blackmail him ...",url:"https://x.com/ProjectConstitu/status/1999656548906193036",cats:["Murder/Assassination Conspiracy","Financial Fraud Accusations"]},
+  {date:"2025-12-06T08:28Z",eng:"101.9K",text:"🚨FROM WIFE TO PROP IN 90 DAYS: IS @MrsErikaKirk Actually GRIEVING Or Just The New STAR Of @TPUSA's Grief Porn CINEMATIC UNIVERSE Im not gonna sugarcoat it: everything about Erika Kirk right now feels like a professionally directed grief commercial and Im genuinely asking if an...",url:"https://x.com/ProjectConstitu/status/1997221699465404477",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-06T03:58Z",eng:"94K",text:"🚨BOMBSHELL: Erika Kirk Points Finger at Hunter Kozak Guy Who Asked About TRANS VIOLENCE Seconds Before Charlie's Murder But She's Also Buying the FBI's Story Hook Line & Sinker😱 Tonight on her FOX special @MrsErikaKirk Dropped a BOMBSHELL: Charlie was mid-answer on trans shoot...",url:"https://x.com/ProjectConstitu/status/1986281974504296723",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-21T12:40Z",eng:"52K",text:"🚨EXPOSED: Erika Kirk's FREUDIAN SLIP Proves She's CASHING IN ON CHARLIE'S DEATH 'GRIFT' Says It All 😳 Kirk Just FREUDIAN-SLIPPED on Stage at AmFest 2025 and Called Charlie Kirk's Legacy a ",url:"https://x.com/ProjectConstitu/status/2002720818992652733",cats:["Personal/Sexual Attacks","Financial Fraud Accusations"]},
+  {date:"2025-12-12T23:01Z",eng:"42.5K",text:"🚨 BOMBSHELL UPDATE: Erika Kirk CAUGHT in LIVE LIE on Glenn Beck Charlie's ",url:"https://x.com/ProjectConstitu/status/1999615683739672615",cats:["Lying/Cover-Up"]},
+  {date:"2025-10-17T21:30Z",eng:"40.2K",text:"🚨 EXPOSED: Phil Lyman LAUGHING after witnessing Charlie Kirk's murder And his DEEP ties to Erika Kirk's shady ",url:"https://x.com/ProjectConstitu/status/1979299117533909119",cats:["Murder/Assassination Conspiracy"]}
+];
+
+const TPUSA_POSTS = [
+  {date:"2026-03-28",eng:"6,397 likes",text:"TPUSA IS PANICKING: I Just Received A SECOND 'Cease & Desist' Letter From TPUSA Demanding I STOP Investigating Them \u2014 My Answer Is NO!",url:"https://x.com/ProjectConstitu/status/2037754488379900255",cats:["Criminal Accusations"],legal:"Public defiance of legal warnings is usable as evidence of continued intentional conduct."},
+  {date:"2026-02-22",eng:"3.6M",text:"BOMBSHELL: NEVER-BEFORE-SEEN TPUSA Camera STILLS From Behind Charlie LEAKED From The Day He Was KILLED. Dark Marks VISIBLE On His Hands...",url:"https://x.com/ProjectConstitu/status/2025706776260120871",cats:["Murder/Assassination Conspiracy"],legal:"Implies TPUSA concealed crime scene evidence. 3.6M engagements."},
+  {date:"2026-03-26",eng:"2,132 likes",text:"EXPOSED: Josh Hammer Just Said The Quiet Part Out Loud \u2014 Upset That Leads in Charlie Kirk Assassination Were Passed to Investigators!",url:"https://x.com/ProjectConstitu/status/2037231436177002860",cats:["Murder/Assassination Conspiracy"],legal:"Implies Josh Hammer has something to hide regarding the assassination."},
+  {date:"2026-03-24",eng:"1,938 likes",text:"FULL MELTDOWN: TPUSA Execs Are PANICKING Live On AIR Over Joe Kent \u2014 Here Is The DISMANTLING Of Their LIES. Andrew Kolvet and Blake Neff had a complete, hyperventilating meltdown...",url:"https://x.com/ProjectConstitu/status/2036514593057407294",cats:["Lying/Cover-Up"],legal:"Directly calls named TPUSA executives liars on air."},
+  {date:"2026-01-22",eng:"537K",text:"CANDACE OWENS BOMBSHELL: TPUSA Rakes in $250M Off Charlie's Death Then FIRES Dozens in Paranoid Purge. New Donor THREAT Text Revealed...",url:"https://x.com/ProjectConstitu/status/2014469781814948100",cats:["Murder/Assassination Conspiracy"],legal:"Accuses TPUSA of profiting from murder then conducting purges to silence insiders."},
+  {date:"2026-03-28",eng:"798 likes",text:"SHOCKING: TPUSA Caught Using Charlie's Death to Drain Elderly Bank Accounts \u2014 The DISGUSTING Mailer That TPUSA is Now Sending Out...",url:"https://x.com/ProjectConstitu/status/2037992493682409500",cats:["Criminal Accusations"],legal:"Accuses TPUSA of mail fraud targeting the elderly. 'Drain elderly bank accounts' implies criminal financial exploitation."},
+  {date:"2026-03-23",eng:"1,309 likes",text:"EXPOSED: How Tyler Bowyer is ALLEGEDLY Using TPUSA Donor Money to SEIZE the Utility that Stole His FAMILY'S Land...",url:"https://x.com/ProjectConstitu/status/2036036658986889662",cats:["Criminal Accusations"],legal:"Accuses Tyler Bowyer of misappropriating donor funds for a personal family land dispute."},
+  {date:"2026-03-04",eng:"2,183 likes",text:"MASSIVE BOMBSHELL: Erika Kirk, Tyler Bowyer, and Jeffrey Epstein's Paths All Intersect In ROMANIA At A Romania MODELING Agency \u2014 Did Erika Kirk and Tyler Bowyer Actually Meet While TRAFFICKING Children In Romania?",url:"https://x.com/ProjectConstitu/status/2028995586012131437",cats:["Sex Trafficking/Epstein"],legal:"Directly asks whether two named individuals met while trafficking children. Defamation per se."},
+  {date:"2025-10-06",eng:"362K",text:"MIND-BLOWING THEORY: Was TPUSA's Security Chief Dan Flood BLACKMAILED into Helping Assassinate Charlie Kirk to Bury His DARK SECRETS...",url:"https://x.com/ProjectConstitu/status/1975065614801584327",cats:["Murder/Assassination Conspiracy"],legal:"Accuses Dan Flood of being blackmailed into participating in assassination. Labels it a 'theory' but presents detailed factual claims."},
+  {date:"2026-03-27",eng:"132 likes",text:"Rick Cutler Also Has His Own Child Trafficking Non Profit Too. Very ODD that everyone we have been investigating in this Charlie Kirk Assassination Investigation Is Connected To Child Trafficking Charities. This is NOT Normal People.",url:"https://x.com/ProjectConstitu/status/2037465682791547055",cats:["Sex Trafficking/Epstein"],legal:"Implies Rick Cutler uses a nonprofit as cover for child trafficking through guilt-by-association."},
+],
+// ===== NEW POSTS (Sep-Dec 2025 expansion) =====
+  {date:"2025-12-06T19:15Z",eng:"2.6M",text:"🚨 MASSIVE UPDATE: The Marseille Hat Conspiracy Just Got DEEPER French Foreign Legion Assassin Ties EXPOSED 😱🔥 If you thought the French Legion soldier lurking 10ft from Charlie Kirk was wild. buckle up. Shoutout to @GoingStrategic (FOLLOW HIM) who dug HOURS into this rabbit ho...",url:"https://x.com/ProjectConstitu/status/1997384413139890264",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-02T22:52Z",eng:"1.8M",text:"🚨EXPLOSIVE BOMBSHELL: Candace Owens CONNECTS Charlie Kirks Assassination to a BILLION-DOLLAR DuPont Deal- TPUSA Insider's IMPLICATED Shes now publicly naming the mysterious French-American billionaire donor that multiple Turning Point USA insiders swear got an immediate phone ...",url:"https://x.com/ProjectConstitu/status/1995989523570856171",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-18T14:38Z",eng:"1.7M",text:"🚨BREAKING: MYSTERIOUS PRIVATE JET @RealCandaceO Exposed that flew a WEIRD route on the MORNING Charlie Kirk was ASSASSINATED. Belongs to a MAJOR TPUSA DONOR who might've been FURIOUS over Kirk's shifting views on Israel. Coincidence Or something SINISTER Yesterday on her live ...",url:"https://x.com/ProjectConstitu/status/1990791732494237770",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-02T23:06Z",eng:"1.2M",text:"🚨Candace Owens Just Dropped The Most EXPLOSIVE New Timeline Yet On The Charlie Kirk ASSASSINATION and its DARK. On July 11 Tucker Carlson went completely off-script at TPUSA torching Epstein foreign armies and Bill Ackmans mysterious billions. Tucker later told Candace it just...",url:"https://x.com/ProjectConstitu/status/1995993095498834042",cats:["Murder/Assassination Conspiracy","Sex Trafficking/Epstein"]},
+  {date:"2025-11-04T19:54Z",eng:"916.6K",text:"🚨EXCLUSIVE: New Video From UVU Shows TPUSA's First Arrival Blake Neff's Backseat Exit Minutes Before Charlie Was Assassinated 🧐 This raw clip obtained through our relentless investigation captures the FIRST @TPUSA SUV pulling up to the Amphitheater minutes before Charlie's arr...",url:"https://x.com/ProjectConstitu/status/1985797786340601913",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-16T01:37Z",eng:"751.1K",text:"🚨SHOCKING BETRAYAL: TPUSA Breaks Erika Kirk's Agreement With Candace Hours Before The Meeting Pushing Proven LIES From SHADY Experts Further Destroying Their Credibility🐍❌ Just before Erika Kirk's private Nashville meeting with Candace Owens TPUSA hosts Blake Neff & Andrew Kol...",url:"https://x.com/ProjectConstitu/status/2000742116800999469",cats:["Lying/Cover-Up"]},
+  {date:"2025-12-03T21:27Z",eng:"672.7K",text:"🚨BREAKING: TPUSA JUST PUT OUT A 10-MINUTE RESPONSE TO CANDACE OWENS AND DODGED EVERY SINGLE RECEIPT SHE ASKED FOR 😂🧾 They sent poor Blake out solo (nobody else had the guts to show their face) to read a scripted essay that: ❌ NEVER answered the donor fraud claims ❌ NEVER showe...",url:"https://x.com/ProjectConstitu/status/1996330504539242651",cats:["Criminal Accusations","Professional/Credential Attacks"]},
+  {date:"2025-11-06T23:23Z",eng:"636.4K",text:"🚨 BREAKING: NEW DRONE FOOTAGE From The TPUSA Event At UVU Where Charlie Was Assassinated Proving TPUSA LIED AGAIN New drone footage from the Charlie Kirk UVU event on Sept 10the day he was assassinatedexposes the LIES. UVU @TPUSA and Tyler Boyer claimed NO drones were overhead...",url:"https://x.com/ProjectConstitu/status/1986575241120821758",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-12-08T13:56Z",eng:"585.1K",text:"🚨ABSOLUTELY DISGUSTING: While Charlie Kirks body still isnt even in the ground TPUSA threw a $10000-a-plate black-tie gala at Mar-a-Lago this weekend laughing clinking champagne glasses and raking in millions from the exact same pro-Israel donors Charlie died rejecting. Let th...",url:"https://x.com/ProjectConstitu/status/1998028883132567702",cats:["Intelligence Agency Accusations","Lying/Cover-Up"]},
+  {date:"2025-11-01T22:42Z",eng:"506.8K",text:"🚨 BOMBSHELL EVIDENCE: CONFIRMED NOT 2 BUT 5 EGYPTIAN MILITARY PLANES SWARMED PROVO in 2025 Direct Flights to Charlie Kirk's Assassination Site. This Is No Coincidence. @RealCandaceO ignited the fire with her timeline exposing SU-BTT & SU-BND shadowing TPUSA events for yearslan...",url:"https://x.com/ProjectConstitu/status/1984752930310733956",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-09-29T08:47Z",eng:"491.4K",text:"🚨 EXPOSED: Dan Flood's Secret Recording Of The Charlie Kirk Murder Did Charlie Kirk's Security Chief Hit Record On Smart Glasses Seconds Before the Shot Shocking video emerges that appear to show Dan Flood head of Turning Point USA's security standing right behind Charlie Kirk...",url:"https://x.com/ProjectConstitu/status/1972584114306892111",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-01T22:07Z",eng:"439.8K",text:"🚨EXPOSED: Charlie Kirk's Assassination Was NO Lone Gunman It Was a FOREIGN DRONE STRIKE Guided by INFRARED LASER from a TPUSA EMPLOYEE Former CIA operative @stevendenoon and myself just dropped the blueprint: September 10 2025 wasn't chaosit was a meticulously staged TOP-SECRE...",url:"https://x.com/ProjectConstitu/status/1984744077917642983",cats:["Murder/Assassination Conspiracy","Intelligence Agency Accusations"]},
+  {date:"2025-10-16T21:45Z",eng:"421.5K",text:"🚨 EXPOSED: TPUSA's Tyler Bowyer CAUGHT LYING About NO Drones at Charlie Kirk's Assassination What Are They HIDING Y'all the gaslighting on Charlie's murder at UVU is OFF THE CHARTS. Tyler Bowyer (TPUSA COO) claims their ",url:"https://x.com/ProjectConstitu/status/1978940492445552802",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-11-16T14:39Z",eng:"409.2K",text:"🚨BOMBSHELL: TPUSA's Tyler Boyer DemotedThen Kirk Murdered The Audit He Killed to Hide Donor Theft😱 This CPA dove deep into Turning Point USA's books and uncovered a bombshell: just days before Kirk's murder he moved to oust Boyer and launch a bombshell auditnow conveniently sc...",url:"https://x.com/ProjectConstitu/status/1990067231871431007",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-30T14:24Z",eng:"402.6K",text:"🚨BOMBSHELL: MAJOR ALLEGATIONS Surface Against @TPUSA Is TYLER BOYER Working With AZ Senator Jake Hoffman To EMBEZZLE Funds From TPUSA IRS 990 forms that were missing for months from Turning Point USAs affiliated organizations have suddenly been posted online dated May 2025 rig...",url:"https://x.com/ProjectConstitu/status/1995136903947890744",cats:["Financial Fraud Accusations"]},
+  {date:"2025-11-24T23:25Z",eng:"385.7K",text:"🚨 URGENT: Why Candace Owens Assassination Warning is 100% CREDIBLE and She Might Not Have Much Time Left Macron personally begged Trump to silence her Trump himself called Candace trying to shut her down France already filed lawsuits to gag her Her Becoming Brigitte series hum...",url:"https://x.com/ProjectConstitu/status/1993098622041219286",cats:["Criminal Accusations","Murder/Assassination Conspiracy"]},
+  {date:"2025-11-23T19:33Z",eng:"372.1K",text:"🚨 BREAKING: The missing Turning Point 990s just dropped all 4 filed in May 2025 and the truth is wilder than the conspiracy theories.🧐 Caveat: This is according to Grok. I am not a accountant and don't purport to be one this is just my preliminary findings. Heres what the actu...",url:"https://x.com/ProjectConstitu/status/1992678028971778408",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-04T03:41Z",eng:"329.6K",text:"🚨 BOMBSHELL: According To Ex-TPUSA EMPLOYEE Charlie Kirk Discovered SECRET $5M Stock Market Slush Fund With ZERO Employees Then Dropped DEAD😱 Former staffer Joshua Peterson just went on the record: There was an inner circle at Turning Point USA constantly working against Charl...",url:"https://x.com/ProjectConstitu/status/1996424567770759342",cats:["Murder/Assassination Conspiracy","Financial Fraud Accusations"]},
+  {date:"2025-11-30T15:43Z",eng:"329K",text:"🚨SHOCKING: They Just Cant Help Themselves TURNING POINT FAITH Is At It AGAIN This Week. 🤦♂ Another pastor gets on their stage skips the Bible and his VERY FIRST WORDS are:CANDACE OWENS IS AN ANTI-SEMITE. Exact same smear different church different week. Who is feeding these pa...",url:"https://x.com/ProjectConstitu/status/1995156661053325385",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-14T00:33Z",eng:"267.4K",text:"🚨EXPOSED: Candace Owens RIPS the MASK OFF Calvary Chapel's House of Horrors 😱 Calvary Chapelled by sleazy pastor Rob McCoy (TPUSA Faith's BFF)is a DEN of pedophiles fraudsters & cover-ups. Convicted child molesters get VIP access to kids Fraud money funneled to ",url:"https://x.com/ProjectConstitu/status/1989129602396995615",cats:["Criminal Accusations","Sex Trafficking/Epstein","Professional/Credential Attacks"]},
+  {date:"2025-12-11T23:57Z",eng:"262.1K",text:"🚨BREAKING: Candace Owens Just Put Erika Kirk On BLAST: TELL ME ONE LIE I TOLD ILL WAIT Tonight Candace went full SCORCHED-EARTH on the entire PR circus: Erica Kirk says Im lying for money. Fine. Name ONE lie. Just one. Ill stop tomorrow if you can point to it. Dead silence fro...",url:"https://x.com/ProjectConstitu/status/1999267251581591748",cats:["Lying/Cover-Up"]},
+  {date:"2025-12-04T04:08Z",eng:"260.2K",text:"🚨EXPOSED: Tim Pool Just Had an ANOTHER On-Air Meltdown Calling Candace a Fucking Scumbag- A DESPERATE Attempt At Relevance Now That His CHANNEL IS DYING🤡 @Timcast just tourched his reputation for good with ANOTHER 10-minute on-air meltdown screaming that Candace Owens is a fuc...",url:"https://x.com/ProjectConstitu/status/1996431479920816300",cats:["Lying/Cover-Up"]},
+  {date:"2025-11-15T03:48Z",eng:"256.1K",text:"🚨EXPLOSIVE LEAK: Charlie Kirk Security Head Brian Harpole Released Text Message's To Pin The Blame On UVU Police For The Lack Of Rooftop Overwatch But Spectacularly those Text Messages Backfired Proving Brian's Own Criminal Negligence.😱 In a stunning revelation on the Shawn Ry...",url:"https://x.com/ProjectConstitu/status/1989541057218961719",cats:["Criminal Accusations"]},
+  {date:"2025-11-16T23:12Z",eng:"222.7K",text:"🚨 SHOCKING: McCoy Family's NEPOTISM Plus John McGovern's Shady UKRAINE TIES And Payroll Anomalies Were They The Root Cause For TPUSA's HOSTILE TAKE-OVER And Charlie Kirk's Tragic DEATH😱 As CPA Zach @FinanceWolves continue's to probe TPUSA links into Rob McCoy's self-aggrandizi...",url:"https://x.com/ProjectConstitu/status/1990196403910427124",cats:["Criminal Accusations","Professional/Credential Attacks"]},
+  {date:"2025-12-12T19:16Z",eng:"217.8K",text:"🚨 EXPOSED: Turning Point USA's $36 MILLION STOCK GAMBLE Donor Cash on Wall Street Casino Hey @MrsErikaKirk @tylerbowyer @TPUSA your 2023 IRS Form 990 just dropped a BOMBSHELL: $36731789 in publicly traded securities That's donor money from hardworking conservatives funding you...",url:"https://x.com/ProjectConstitu/status/1999559117640216933",cats:["Financial Fraud Accusations"]},
+  {date:"2025-10-08T07:06Z",eng:"212K",text:"🚨MASSIVE BREAKING NEWS: Dr. Frank Turek CONFIRMS Charlie Kirk FEARED ASSASSINATION before UVU shooting Also CONFIRMED TPUSA Was Running Drones Over UVU An HOUR Before Charlies Event 😱 WHY DIDN'T THEY SPOT THE SHOOTER @DrFrankTurek has just confirmed what many have feared: Char...",url:"https://x.com/ProjectConstitu/status/1975820012762882535",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-10-08T02:36Z",eng:"209.6K",text:"Mikey McCoy (TPUSA staffer + son of Charlie Kirks pastor Rob McCoy) just admitted on @DrFrankTurek's podcast that TPUSA ran a geofencing campaign at Charlies memorial in Cardinals Stadium. ➡ They tracked & logged 277000+ devices from people who attended. ➡ No one gave consent....",url:"https://x.com/ProjectConstitu/status/1975752142716563678",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-03T23:40Z",eng:"191.4K",text:"🚨CANDACE OWENS FULL RESPONSE To TPUSA: Candace Owens Just OBLITERATED TPUSAS 10-Minute DEFLECTION She ACCEPTED Their LIVE-STREAM CHALLENGE With One Sentence That ENDED The DEBATE BEFORE IT STARTED 🔥 She went line-by-line and buried every lie they told: I never said Mikeys wife...",url:"https://x.com/ProjectConstitu/status/1996363857682391480",cats:["Lying/Cover-Up"]},
+  {date:"2025-11-14T23:53Z",eng:"171.2K",text:"🚨BOMBSHELL: Cameraman Says TPUSA GHOST Him After Odd 2am Phone Call PROBING If He Had Capturing CHARLIE KIRK'S ASSASSINATIONWhat's the COVER-UP In the chaotic aftermath of Charlie Kirk's assassination on September 11 2025 at the Turning Point USA event in Utah Valley Universit...",url:"https://x.com/ProjectConstitu/status/1989481930975309961",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-10-30T03:36Z",eng:"170.3K",text:"🚨SHOCKING: The Day MIKEY MCCOY Skipped Charlie Kirk's Show He Was Out Pocketing A MASSIVE $250K DONATION TO TPUSA 😱 Now He's TPUSA's Golden Boy🧐 The day Charlie Kirk was assassinated at UVUSeptember 10Mikey McCoy was nowhere to be found. Abandoning his ",url:"https://x.com/ProjectConstitu/status/1983739807189614938",cats:["Murder/Assassination Conspiracy"]}
+];
+
+const ALL_TOP = [...ERIKA_POSTS, ...TPUSA_POSTS].sort((a,b) => {
+  function pe(s) { if (!s) return 0; s=s.replace(/,/g,"").replace(" likes",""); if(s.includes("M")) return parseFloat(s)*1e6; if(s.includes("K")) return parseFloat(s)*1e3; return parseFloat(s)||0; }
+  return pe(b.eng) - pe(a.eng);
+}).slice(0, 30);
+
+// ========== RENDER FUNCTIONS ==========
+function getCatClass(cat) {
+  if (cat.includes("Murder")) return "murder";
+  if (cat.includes("Trafficking") || cat.includes("Epstein")) return "trafficking";
+  if (cat.includes("Intelligence")) return "intel";
+  if (cat.includes("Lying") || cat.includes("Cover")) return "lying";
+  if (cat.includes("Personal") || cat.includes("Sexual")) return "personal";
+  if (cat.includes("Criminal")) return "criminal";
+  if (cat.includes("Credential") || cat.includes("Professional")) return "credential";
+  if (cat.includes("Financial")) return "financial";
+  return "";
+}
+
+function renderTweet(post) {
+  return `
+    <div class="tweet-card ${post.retracted ? 'retracted' : ''}">
+      <div class="tweet-meta">
+        <span class="tweet-date">${post.date}</span>
+        <span class="tweet-engagement">${post.eng} engagements</span>
+      </div>
+      <div class="tweet-categories">
+        ${post.cats.map(c => `<span class="cat-tag ${getCatClass(c)}">${c}</span>`).join("")}
+      </div>
+      <div class="tweet-text">"${post.text}"</div>
+      <a href="${post.url}" target="_blank" class="tweet-link">View Original Post &rarr;</a>
+      ${post.legal ? `<div class="legal-note"><strong>Legal exposure:</strong> ${post.legal}</div>` : ""}
+    </div>`;
+}
+
+function renderSection(containerId, posts, limit) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = posts.slice(0, limit || 15).map(renderTweet).join("");
+}
+
+// ========== FILTER TABS ==========
+document.getElementById("erika-tabs").addEventListener("click", function(e) {
+  if (!e.target.classList.contains("tab")) return;
+  this.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  e.target.classList.add("active");
+  const filter = e.target.dataset.filter;
+  const filtered = filter === "all" ? ERIKA_POSTS : ERIKA_POSTS.filter(p => p.cats.some(c => c.includes(filter.split("/")[0])));
+  renderSection("erika-tweets", filtered, 15);
+});
+
+// ========== TIMELINE ==========
+function renderTimeline() {
+  const events = [
+    { date: "Sept 10, 2025", text: "Charlie Kirk is assassinated at Utah Valley University during a TPUSA event." },
+    { date: "Sept 20, 2025", text: "@ProjectConstitu publishes 'BOMBSHELL: MIND-BLOWING Twist' claiming the shot came from a 'UTILITY SHAFT BEHIND HIM.' (7.6M engagements)" },
+    { date: "Oct 1, 2025", text: "Claims 'New Video Evidence Suggests Shot Fired FROM INSIDE the Tent.' (13.9M engagements)" },
+    { date: "Oct 4, 2025", text: "Claims 'NEW CAMERA ANGLE BLOWS OPEN CHARLIE KIRK SHOOTING' with shooter hiding behind tent. (13.6M engagements)" },
+    { date: "Oct 24, 2025", text: "Claims Erika Kirk and Candace Owens are in a 'SECRET ALLIANCE' post-assassination. (158K engagements)" },
+    { date: "Oct 25, 2025", text: "Accuses Pastor Rob McCoy of 'CAUGHT LYING About His Son.' (5.2M engagements)" },
+    { date: "Oct 26, 2025", text: "Asks if 'Mikey McCoy Was Groomed to Replace Charlie Kirk' and 'Flee the Scene.' (2M engagements)" },
+    { date: "Nov 4, 2025", text: "Claims TPUSA's Blake Neff's 'Backseat Exit Minutes Before Charlie Was Assassinated' is suspicious. (916K engagements)" },
+    { date: "Nov 6, 2025", text: "Accuses Erika Kirk of pointing finger at wrong person while 'Buying the FBI Story Hook Line & Sinker.' (94K engagements)" },
+    { date: "Nov 18, 2025", text: "Claims 'MYSTERIOUS PRIVATE JET' of TPUSA donor flew weird route morning of assassination. (1.7M engagements)" },
+    { date: "Dec 2, 2025", text: "Connects assassination to 'BILLION-DOLLAR DuPont Deal' implicating TPUSA insiders. (1.8M engagements)" },
+    { date: "Dec 6, 2025", text: "Asks if Erika Kirk is 'Actually GRIEVING Or Just The New STAR of TPUSA Grief Porn.' (101K engagements)" },
+    { date: "Dec 10, 2025", text: "Claims 'CANDACE OWENS JUST ENDED ERIKA KIRK ON LIVE PODCAST.' (1.2M engagements)" },
+    { date: "Dec 12, 2025", text: "Claims Erika Kirk 'CAUGHT LYING On National TV About Charlie's FINAL TEXT.' (158K engagements)" },
+    { date: "Dec 19, 2025", text: "Claims Erika Kirk, Brian Harpole & Mark Amodei 'CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT.' (1.1M engagements)" },
+    { date: "Dec 20, 2025", text: "Claims Charlie Kirk was 'ASSASSINATED BY DRONE from FORT HUACHUCA' with Erika's family ties to the base. (402K engagements)" },
+    { date: "Dec 22, 2025", text: "Declares 'Erika Kirk Is So COOKED' and threatens to 'nail her ass to the wall' for involvement in conspiracy. (148K engagements)" },
+    { date: "Jan 2, 2026 at Utah Valley University during a TPUSA event." },
+    { date: "Sept 20, 2025", text: "@ProjectConstitu publishes 'BOMBSHELL: MIND-BLOWING Twist' claiming the shot came from a 'UTILITY SHAFT BEHIND HIM.' (7.6M engagements)" },
+    { date: "Oct 1, 2025", text: "Claims 'New Video Evidence Suggests Shot Fired FROM INSIDE the Tent.' (13.9M engagements)" },
+    { date: "Oct 4, 2025", text: "Claims 'NEW CAMERA ANGLE BLOWS OPEN CHARLIE KIRK SHOOTING' with shooter hiding behind tent. (13.6M engagements)" },
+    { date: "Oct 24, 2025", text: "Claims Erika Kirk and Candace Owens are in a 'SECRET ALLIANCE' post-assassination. (158K engagements)" },
+    { date: "Oct 25, 2025", text: "Accuses Pastor Rob McCoy of 'CAUGHT LYING About His Son.' (5.2M engagements)" },
+    { date: "Oct 26, 2025", text: "Asks if 'Mikey McCoy Was Groomed to Replace Charlie Kirk' and 'Flee the Scene.' (2M engagements)" },
+    { date: "Nov 4, 2025", text: "Claims TPUSA's Blake Neff's 'Backseat Exit Minutes Before Charlie Was Assassinated' is suspicious. (916K engagements)" },
+    { date: "Nov 6, 2025", text: "Accuses Erika Kirk of pointing finger at wrong person while 'Buying the FBI Story Hook Line & Sinker.' (94K engagements)" },
+    { date: "Nov 18, 2025", text: "Claims 'MYSTERIOUS PRIVATE JET' of TPUSA donor flew weird route morning of assassination. (1.7M engagements)" },
+    { date: "Dec 2, 2025", text: "Connects assassination to 'BILLION-DOLLAR DuPont Deal' implicating TPUSA insiders. (1.8M engagements)" },
+    { date: "Dec 6, 2025", text: "Asks if Erika Kirk is 'Actually GRIEVING Or Just The New STAR of TPUSA Grief Porn.' (101K engagements)" },
+    { date: "Dec 10, 2025", text: "Claims 'CANDACE OWENS JUST ENDED ERIKA KIRK ON LIVE PODCAST.' (1.2M engagements)" },
+    { date: "Dec 12, 2025", text: "Claims Erika Kirk 'CAUGHT LYING On National TV About Charlie's FINAL TEXT.' (158K engagements)" },
+    { date: "Dec 19, 2025", text: "Claims Erika Kirk, Brian Harpole & Mark Amodei 'CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT.' (1.1M engagements)" },
+    { date: "Dec 20, 2025", text: "Claims Charlie Kirk was 'ASSASSINATED BY DRONE from FORT HUACHUCA' with Erika's family ties to the base. (402K engagements)" },
+    { date: "Dec 22, 2025", text: "Declares 'Erika Kirk Is So COOKED' and threatens to 'nail her ass to the wall' for involvement in conspiracy. (148K engagements)" },
+    { date: "Jan 2, 2026 at Utah Valley University during a TPUSA event." },
+    { date: "Oct 6, 2025", text: "@ProjectConstitu publishes theory that TPUSA Security Chief Dan Flood was 'BLACKMAILED into helping assassinate Charlie Kirk.' (362K engagements)" },
+    { date: "Dec 10, 2025", text: "Posts that Erika Kirk went 'FULL DEEP-STATE SCRIPT' on Fox News, declaring her part of the 'COVER-UP.' (832K engagements)" },
+    { date: "Jan 2, 2026", text: "Claims Erika Kirk 'Is a ROTHSTEIN' with family ties to Epstein. (1.2M engagements)" },
+    { date: "Jan 8, 2026", text: "Claims Erika Kirk appeared in a 'Secret CIA-Linked Doc' about EMP attacks. (2.1M engagements)" },
+    { date: "Jan 28, 2026", text: "Leaks Erika Kirk's employee Zoom call from 11 days after assassination, framing her tone as evidence of guilt. (474K engagements)" },
+    { date: "Feb 22, 2026", text: "Claims leaked TPUSA camera stills show 'dark marks' on Charlie's hands, implying TPUSA concealed evidence. (3.6M engagements)" },
+    { date: "Feb 26, 2026", text: "Asks whether Erika Kirk was 'BORN A MALE.' (5M engagements)" },
+    { date: "Mar 4, 2026", text: "Asks whether Erika Kirk and Tyler Bowyer met 'while TRAFFICKING Children in Romania.' (2,183 likes)" },
+    { date: "Mar 6, 2026", text: "Claims Erika's entire college degree is fabricated: 'NO Double Major, NO Summa Cum Laude.' (5,126 likes)" },
+    { date: "Mar 10, 2026", text: "Claims Erika Kirk had 'Secret MEETINGS With Jeffrey Epstein' at a modeling agency. (4,967 likes)" },
+    { date: "Mar 12, 2026", text: "Accuses Erika Kirk of being the 'Point Person' for Epstein's housing of underage victims. (741K engagements)" },
+    { date: "Mar 14, 2026", text: "THE FALSE WIRETAP CLAIM: Posts that DOJ audio captures Erika Kirk scheduling underage girls for Epstein. Claims verification. LATER RETRACTED. (11.6M engagements)" },
+    { date: "Mar 24, 2026", text: "Claims Erika Kirk's 'alibi DESTROYED' and she was hiding in a 'CIA front company.' (7,090 + 2,926 likes)" },
+    { date: "Mar 26, 2026", text: "Posts old roommate video, insinuating Erika Kirk is secretly lesbian. (6.8M engagements)" },
+    { date: "Mar 27, 2026", text: "Calls Erika Kirk a 'SUSPECT In A Murder Investigation' and 'NOT a Widow.' (1,409 likes)" },
+    { date: "Mar 28, 2026", text: "Publicly posts and defies SECOND cease & desist letter from TPUSA. Accuses TPUSA of 'draining elderly bank accounts.' (6,397 + 798 likes)" },
+    { date: "Mar 29, 2026", text: "Campaign continues. Account reaches 273,232 followers. 488,364 total tweets. No sign of slowing down." },
+  ];
+  const el = document.getElementById("timeline-content");
+  el.innerHTML = events.map(e => `
+    <div class="timeline-item">
+      <div class="timeline-date">${e.date}</div>
+      <div class="timeline-text">${e.text}</div>
+    </div>`).join("");
+}
+
+// ========== CHARTS ==========
+function renderCharts() {
+  const catData = {
+    labels: ["Murder/Assassination", "Lying/Cover-Up", "Sex Trafficking", "Intelligence Agency", "Criminal Accusations", "Personal/Sexual", "Professional", "Financial Fraud"],
+    datasets: [{
+      data: [177, 102, 50, 52, 45, 23, 10, 12],
+      backgroundColor: ["#ef4444", "#eab308", "#f97316", "#8b5cf6", "#f43f5e", "#ec4899", "#06b6d4", "#22c55e"],
+      borderWidth: 0,
+      borderRadius: 4,
+    }]
+  };
+  new Chart(document.getElementById("catChart"), {
+    type: "bar",
+    data: catData,
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#9ca3af" } },
+        y: { grid: { display: false }, ticks: { color: "#e5e5e5", font: { size: 11 } } }
+      }
+    }
+  });
+
+  const targetData = {
+    labels: ["Erika Kirk", "TPUSA", "Israel/Mossad", "A. Kolvet", "T. Bowyer", "B. Neff", "D. Flood", "J. Hammer"],
+    datasets: [{
+      data: [105, 86, 33, 15, 12, 4, 4, 2],
+      backgroundColor: ["#dc2626", "#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#8b5cf6", "#ec4899"],
+      borderWidth: 0,
+    }]
+  };
+  new Chart(document.getElementById("targetChart"), {
+    type: "doughnut",
+    data: targetData,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "right", labels: { color: "#e5e5e5", font: { size: 11 }, padding: 12 } }
+      }
+    }
+  });
+}
+
+// ========== COUNTER ANIMATION ==========
+function animateCounters() {
+  document.querySelectorAll('.num[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const duration = 2000;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString();
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString();
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+// ========== SCROLL REVEAL ==========
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.1 });
+document.querySelectorAll(".count-up").forEach(el => observer.observe(el));
+
+// ========== INIT ==========
+renderSection("erika-tweets", ERIKA_POSTS, 15);
+renderSection("tpusa-tweets", TPUSA_POSTS, 10);
+renderSection("all-tweets", ALL_TOP, 30);
+renderTimeline();
+renderCharts();
+setTimeout(animateCounters, 500);
+</script>
+</body>
+</html>
