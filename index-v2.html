@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Smear Machine: An Investigation into @ProjectConstitu | Defamation Tracker</title>
+<meta name="description" content="Investigative record: 1,541 posts and 29 direct replies from @ProjectConstitu reviewed for a pattern of potentially defamatory claims against Erika Kirk and Turning Point USA. Charts, timeline, and legal context. Not legal advice.">
+<meta name="author" content="Apple Lamps">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://defamationtracker.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Smear Machine — An Investigation into @ProjectConstitu">
+<meta property="og:description" content="Investigative record of 322 flagged posts and replies. Documented patterns. Legal context.">
+<meta property="og:url" content="https://defamationtracker.com/">
+<meta property="og:image" content="https://defamationtracker.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://defamationtracker.com/og.jpg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg:        #0F0E0C;
+  --bg-2:      #15130F;
+  --bg-card:   #1A1814;
+  --bg-card-2: #211E18;
+  --ink:       #E8E4DC;
+  --ink-muted: #A8A096;
+  --ink-dim:   #6B6258;
+  --rule:      #322D26;
+  --rule-thin: #221E18;
+  --red:       #B8362C;
+  --red-deep:  #732722;
+  --gold:      #B5935E;
+  --paper:     #1F1B14;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* subtle paper grain — barely perceptible */
+  background-image:
+    radial-gradient(rgba(255,250,240,0.012) 1px, transparent 1px);
+  background-size: 3px 3px;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+::selection { background: var(--red-deep); color: var(--ink); }
+
+a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s, color 0.2s; }
+a:hover { color: var(--red); text-decoration-color: var(--red); }
+
+/* ============= TYPOGRAPHY ============= */
+.display, h1, h2, h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(3rem, 8vw, 6.25rem); line-height: 0.95; font-weight: 600; }
+h2 { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; font-weight: 500; margin-bottom: 1rem; }
+h3 { font-size: clamp(1.25rem, 2vw, 1.55rem); line-height: 1.2; font-weight: 600; letter-spacing: 0.005em; }
+
+.kicker {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.kicker--red { color: var(--red); }
+.kicker--gold { color: var(--gold); }
+
+.italic-lede {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-feature-settings: "tnum" 1; }
+
+/* drop cap */
+.has-dropcap > p:first-of-type::first-letter,
+.dropcap::first-letter {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  float: left;
+  font-size: 5.2rem;
+  line-height: 0.85;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem 0 0;
+  color: var(--ink);
+}
+
+/* ============= LAYOUT ============= */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+.measure { max-width: 720px; }
+.measure--wide { max-width: 880px; }
+
+section { padding: clamp(4rem, 9vw, 7.5rem) 0; }
+section + section { border-top: 1px solid var(--rule-thin); }
+
+.rule { height: 1px; background: var(--rule); border: 0; margin: 0; }
+.rule--thin { background: var(--rule-thin); }
+.rule--double { height: 4px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: transparent; }
+
+/* ============= MASTHEAD ============= */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: rgba(15,14,12,0.92);
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.masthead-title-row {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 0.85rem 0 0.5rem;
+  border-bottom: 1px solid var(--rule-thin);
+}
+.masthead-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: block;
+}
+.masthead-title em {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  margin-left: 0;
+  margin-top: 0.15rem;
+  text-transform: none;
+  letter-spacing: 0.06em;
+  display: block;
+}
+.masthead-nav {
+  display: flex; gap: clamp(0.6rem, 2vw, 1.8rem);
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.65rem 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.masthead-nav::-webkit-scrollbar { display: none; }
+.masthead-nav a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.masthead-nav a:hover { color: var(--ink); border-bottom-color: var(--red); }
+@media (max-width: 720px) {
+  .masthead-nav { justify-content: flex-start; padding-left: 0.25rem; padding-right: 0.25rem; }
+}
+
+/* filing strip */
+.filing-strip {
+  border-top: 1px solid var(--rule-thin);
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg-2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.filing-strip-inner {
+  display: flex; flex-wrap: wrap; gap: 0.5rem clamp(1rem, 4vw, 3rem);
+  padding: 0.75rem 0;
+}
+.filing-strip span strong { color: var(--ink-muted); font-weight: 500; }
+
+/* ============= HERO ============= */
+.hero { padding: clamp(4rem, 10vw, 9rem) 0 clamp(3rem, 7vw, 6rem); }
+.hero .kicker { display: inline-block; margin-bottom: 1.6rem; }
+.hero h1 { margin-bottom: 1.4rem; }
+.hero h1 em { font-style: italic; color: var(--ink-muted); font-weight: 400; }
+.hero .hero-subject {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.2;
+  color: var(--ink-muted);
+  margin: -0.4rem 0 1.6rem;
+  padding-left: 0.05em;
+}
+.hero .hero-subject a {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 0.05em;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hero .hero-subject a::before {
+  content: '';
+  display: inline;
+}
+.hero .hero-subject a:hover { color: var(--red); border-bottom-color: var(--ink); }
+.hero .standfirst {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 820px;
+  margin-bottom: 2rem;
+}
+.byline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 3rem;
+}
+.byline a { color: var(--ink-muted); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.byline a:hover { color: var(--red); border-bottom-color: var(--red); }
+.byline .sep { margin: 0 0.6rem; color: var(--rule); }
+
+/* hero stat row — print-style stat box */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stat-row .stat {
+  padding: 1.5rem 1.4rem;
+  border-right: 1px solid var(--rule-thin);
+}
+.stat-row .stat:last-child { border-right: 0; }
+.stat .num,
+.stat .num-mil {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 2.85rem);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-feature-settings: "tnum" 1;
+}
+.stat .num.pct { color: var(--ink); }
+.stat .label {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+/* ============= SECTION HEADERS ============= */
+.section-head { margin-bottom: 3rem; }
+.section-head .kicker { margin-bottom: 1.2rem; display: block; }
+.section-head h2 { max-width: 22ch; margin-bottom: 1.4rem; }
+.section-head .standfirst {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  max-width: 72ch;
+}
+
+.lede {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  max-width: 70ch;
+  margin-bottom: 2.5rem;
+}
+
+/* ============= STAT BLOCK (data sections) ============= */
+.stat-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0;
+  margin: 2rem 0 3rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stat-block .cell {
+  padding: 1.6rem 1.4rem;
+  border-right: 1px solid var(--rule-thin);
+}
+.stat-block .cell:last-child { border-right: 0; }
+.stat-block .num-lg {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.7rem;
+  letter-spacing: -0.02em;
+}
+.stat-block .num-lg.accent { color: var(--red); }
+.stat-block .desc {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+.stat-block .desc strong { color: var(--ink); font-weight: 600; font-style: normal; }
+
+/* ============= EXHIBIT (tweet card) ============= */
+.exhibit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media (min-width: 900px) {
+  .exhibit-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.exhibit {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.exhibit-header {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  background: var(--bg-card-2);
+  border-bottom: 1px solid var(--rule);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.exhibit-header .ex-label { color: var(--ink-muted); }
+.exhibit-header .ex-engagement { color: var(--ink-muted); font-feature-settings: "tnum" 1; }
+
+.exhibit.retracted .exhibit-header { background: var(--red-deep); color: #f5e8e6; border-bottom-color: var(--red); }
+.exhibit.retracted .exhibit-header .ex-label,
+.exhibit.retracted .exhibit-header .ex-engagement { color: #f5e8e6; }
+.exhibit.retracted::after {
+  content: 'RETRACTED';
+  position: absolute; top: -10px; right: 14px;
+  background: var(--red); color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--red);
+}
+
+.exhibit-body { padding: 1.4rem 1.4rem 1.2rem; flex: 1; }
+.exhibit-quote {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink);
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  font-style: normal;
+}
+.exhibit-quote::before { content: '"'; color: var(--ink-dim); font-family: 'Cormorant Garamond', serif; font-size: 1.4em; line-height: 0; vertical-align: -0.25em; margin-right: 0.05em; }
+.exhibit-quote::after { content: '"'; color: var(--ink-dim); font-family: 'Cormorant Garamond', serif; font-size: 1.4em; line-height: 0; vertical-align: -0.25em; margin-left: 0.05em; }
+
+.exhibit-cats {
+  display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1rem;
+}
+.cat {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--rule);
+  color: var(--ink-muted);
+  background: transparent;
+}
+
+.exhibit-note {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule-thin);
+}
+.exhibit-note .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.exhibit-footer {
+  padding: 0.7rem 1.4rem;
+  border-top: 1px solid var(--rule-thin);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+.exhibit-source {
+  color: var(--ink-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.2s, border-color 0.2s;
+}
+.exhibit-source:hover { color: var(--red); border-bottom-color: var(--red); }
+
+/* ============= TABS ============= */
+.tabs { display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 1.5rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.tab {
+  padding: 0.85rem 1.2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  cursor: pointer;
+  border-right: 1px solid var(--rule-thin);
+  transition: color 0.2s, background 0.2s;
+}
+.tab:hover { color: var(--ink-muted); }
+.tab.active { color: var(--ink); background: var(--bg-card-2); }
+
+/* ============= EXHIBIT 1: SMOKING GUN ============= */
+.smoking-gun-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+.smoking-gun-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 700px) {
+  .smoking-gun-step { grid-template-columns: 1fr; }
+}
+.smoking-gun-step .step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 3.5rem;
+  line-height: 0.9;
+  color: var(--ink-dim);
+}
+.smoking-gun-step h3 {
+  margin-bottom: 1rem;
+  font-style: italic;
+  font-weight: 400;
+}
+.smoking-gun-step h3 .label-pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+/* ============= CHARTS ============= */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+@media (min-width: 900px) {
+  .chart-row { grid-template-columns: 1fr 1fr; gap: 3rem; }
+}
+.chart-box {
+  border: 1px solid var(--rule);
+  background: var(--bg-card);
+  padding: 1.5rem;
+}
+.chart-box .kicker { display: block; margin-bottom: 0.3rem; }
+.chart-box h3 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 1.4rem; margin-bottom: 1.2rem; color: var(--ink); }
+.chart-canvas-wrap { height: 360px; position: relative; }
+@media (max-width: 768px) { .chart-canvas-wrap { height: 280px; } }
+
+/* ============= TIMELINE ============= */
+.timeline-wrap { position: relative; padding-left: 2.5rem; }
+.timeline-wrap::before {
+  content: ''; position: absolute; left: 0.55rem; top: 0; bottom: 0;
+  width: 1px; background: var(--rule);
+}
+.timeline-item { position: relative; padding-bottom: 2.4rem; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -2.5rem; top: 0.5rem;
+  width: 9px; height: 9px;
+  border: 1px solid var(--ink-muted);
+  background: var(--bg);
+  transform: translateX(0.1rem);
+}
+.timeline-item.major::before { background: var(--red); border-color: var(--red); }
+.timeline-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 0.4rem;
+}
+.timeline-text {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+/* ============= LEGAL EXPOSURE GRID ============= */
+.legal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin: 2rem 0 3rem;
+}
+@media (min-width: 700px) {
+  .legal-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1000px) {
+  .legal-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.legal-cell {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--rule-thin);
+  border-bottom: 1px solid var(--rule-thin);
+}
+.legal-cell:last-child { border-right: 0; }
+.legal-cell h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+}
+.legal-cell p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+/* aside */
+.aside {
+  margin: 3rem 0 0;
+  padding: 2rem;
+  background: var(--bg-card);
+  border-left: 3px solid var(--red);
+}
+.aside h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.55rem;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+.aside p { font-size: 1.02rem; line-height: 1.65; color: var(--ink-muted); max-width: 70ch; }
+
+/* ============= FOOTER ============= */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 3rem 0 4rem;
+  margin-top: 0;
+}
+footer .filing-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+}
+footer p {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  max-width: 72ch;
+  margin-bottom: 0.6rem;
+}
+footer .colophon {
+  font-family: 'IBM Plex Mono', monospace;
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-top: 1.5rem;
+}
+
+/* fade-in on scroll */
+.reveal { opacity: 0; transform: translateY(8px); transition: opacity 1s ease, transform 1s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* mobile tightening */
+@media (max-width: 600px) {
+  .filing-strip-inner { font-size: 0.62rem; }
+  .stat-row .stat { border-right: 0; border-bottom: 1px solid var(--rule-thin); }
+  .stat-block .cell { border-right: 0; border-bottom: 1px solid var(--rule-thin); }
+  .stat-block .cell:last-child { border-bottom: 0; }
+  .legal-cell { border-right: 0; }
+  .has-dropcap > p:first-of-type::first-letter,
+  .dropcap::first-letter { font-size: 4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============= MASTHEAD ============= -->
+<header class="masthead">
+  <div class="wrap masthead-title-row">
+    <a href="#top" class="masthead-title">Defamation Tracker<em>An investigative record</em></a>
+  </div>
+  <div class="wrap">
+    <nav class="masthead-nav">
+      <a href="#opening">Opening</a>
+      <a href="#reach">Reach</a>
+      <a href="#exhibit-one">Exhibit 1</a>
+      <a href="#erika">Erika Kirk</a>
+      <a href="#tpusa">TPUSA</a>
+      <a href="#replies">Replies</a>
+      <a href="#timeline">Chronology</a>
+      <a href="#legal">Legal Note</a>
+    </nav>
+  </div>
+  <div class="filing-strip">
+    <div class="wrap filing-strip-inner">
+      <span><strong>Investigation</strong> 001</span>
+      <span><strong>Subject</strong> @ProjectConstitu</span>
+      <span><strong>Filed</strong> 2026·04·30</span>
+      <span><strong>Byline</strong> Apple Lamps</span>
+      <span><strong>Status</strong> Active</span>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============= HERO ============= -->
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker kicker--red">Investigation · Defamation · Single Subject</span>
+    <h1>The Smear<br><em>Machine</em></h1>
+    <p class="hero-subject">An investigation into <a href="https://x.com/ProjectConstitu" target="_blank" rel="noopener">@ProjectConstitu</a></p>
+    <p class="standfirst">A 284,000-follower account, built post by post on accusations a court would call defamation per se — and one tweet so wrong its author had to publicly take it back.</p>
+    <p class="byline">By <a href="https://x.com/lamps_apple" target="_blank" rel="noopener">Apple Lamps</a> <span class="sep">·</span> Reviewed through 30 April 2026 <span class="sep">·</span> Source: <a href="https://x.com/ProjectConstitu" target="_blank" rel="noopener">@ProjectConstitu</a></p>
+
+    <div class="stat-row" id="hero-stats">
+      <div class="stat"><span class="num" data-count="284424">0</span><span class="label">Followers as of 1 May 2026</span></div>
+      <div class="stat"><span class="num" data-count="322">0</span><span class="label">Posts &amp; replies flagged</span></div>
+      <div class="stat"><span class="num-mil">641M</span><span class="label">Engagements across 12 months</span></div>
+      <div class="stat"><span class="num pct">+184%</span><span class="label">Follower growth, 1&nbsp;yr</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= OPENING ============= -->
+<section id="opening">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 01 — Opening</span>
+      <h2>One in five posts crosses the line.</h2>
+      <p class="standfirst">Most are not opinion. They are factual claims — verifiable in form, defamatory in substance, broadcast to <strong style="color:var(--ink);font-weight:500">284,424 followers</strong> and amplified by hundreds of millions of engagements. Here is what the record looks like.</p>
+    </div>
+
+    <div class="measure has-dropcap">
+      <p>Between September 2025 and April 2026, the X account <a href="https://x.com/ProjectConstitu" target="_blank" rel="noopener">@ProjectConstitu</a> published 1,541 original posts and grew from roughly 100,000 followers to 284,424 — a 184% gain in twelve months. We reviewed every one of those posts, then went back through 29 high-engagement direct replies the first pass missed. The pattern is not subtle. The account does not argue that Erika Kirk has been a poor steward of her late husband's organization. It states, repeatedly and across multiple categories, that she conspired in his murder, scheduled underage girls for Jeffrey Epstein, runs a CIA front, and had her credentials fabricated.</p>
+      <p style="margin-top:1.2rem">Each of those is a factual assertion about a private individual. Each is presented to the audience as established truth. And on at least one occasion — <em>the wiretap</em>, dated 14 March 2026 — the author publicly admitted he had identified the wrong person on a recording he claimed to have "verified." The retraction reached roughly 5% of the audience that saw the original. This site is what's left when you stop scrolling and read the record cold.</p>
+    </div>
+
+    <div class="stat-block">
+      <div class="cell">
+        <span class="num-lg">19.0%</span>
+        <p class="desc">of reviewed posts flagged for content a court would consider potentially defamatory</p>
+      </div>
+      <div class="cell">
+        <span class="num-lg accent">11.6M</span>
+        <p class="desc">engagements on the single most defamatory tweet — later retracted by the author</p>
+      </div>
+      <div class="cell">
+        <span class="num-lg">106</span>
+        <p class="desc">posts alleging murder or assassination conspiracy across both targets</p>
+      </div>
+      <div class="cell">
+        <span class="num-lg">46</span>
+        <p class="desc">posts connecting targets to Jeffrey Epstein or sex trafficking</p>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box">
+        <span class="kicker">Figure 01</span>
+        <h3>Posts flagged, by category</h3>
+        <div class="chart-canvas-wrap">
+          <canvas id="catChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-box">
+        <span class="kicker">Figure 02</span>
+        <h3>Posts flagged, by target</h3>
+        <div class="chart-canvas-wrap">
+          <canvas id="targetChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <aside class="aside" style="margin-top:3rem">
+      <h3>This is not general political commentary.</h3>
+      <p>LunarCrush ranks @ProjectConstitu the <strong style="color:var(--ink);font-weight:600;font-style:normal">24th most influential creator</strong> on the topic <em>"Turning Point"</em> globally — across every platform, every account, every language. The account is also among the top 10 mentioned by or mentioning <em>@MrsErikaKirk</em>, <em>@TPUSA</em>, <em>@AndrewKolvet</em>, <em>@BlakeSNeff</em>, and <em>@TylerBowyer</em>. The targeting is surgical, not incidental.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============= REACH & VELOCITY ============= -->
+<section id="reach">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 02 — Reach &amp; Velocity</span>
+      <h2>The audience <em>tripled</em> while the campaign ran.</h2>
+      <p class="standfirst">Defamation only matters if it reaches people. This account did. Source: LunarCrush social-intelligence platform, pulled 2026-05-01.</p>
+    </div>
+
+    <div class="stat-block">
+      <div class="cell">
+        <span class="num-lg">284,424</span>
+        <p class="desc">Followers, 1 May 2026</p>
+      </div>
+      <div class="cell">
+        <span class="num-lg accent">+184%</span>
+        <p class="desc">Follower growth in <strong>12 months</strong> — from 100,067 a year ago</p>
+      </div>
+      <div class="cell">
+        <span class="num-lg">641M</span>
+        <p class="desc">Engagements across the 12-month window — up <strong>+257%</strong> year-over-year</p>
+      </div>
+      <div class="cell">
+        <span class="num-lg accent">18.1M</span>
+        <p class="desc">Engagements on the all-time peak day — <strong>5 October 2025</strong>, during the post-assassination conspiracy wave that built the audience</p>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box">
+        <span class="kicker">Figure 03</span>
+        <h3>Followers, Nov 2025 — May 2026</h3>
+        <div class="chart-canvas-wrap">
+          <canvas id="followerChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-box">
+        <span class="kicker">Figure 04</span>
+        <h3>Daily engagements (highlighting peak days)</h3>
+        <div class="chart-canvas-wrap">
+          <canvas id="engagementChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="measure measure--wide" style="margin-top:3rem">
+      <p style="font-size:1.05rem;line-height:1.7;color:var(--ink-muted)">Read the curve. The account had roughly 100,000 followers a year ago and 150,000 the day Charlie Kirk was assassinated. Then it exploded. The <strong style="color:var(--ink);font-weight:600">48-hour window of 5–6 October 2025</strong> alone generated <strong style="color:var(--ink);font-weight:600">over 30 million engagements</strong> on TPUSA-conspiracy posts about the assassination — that's where the audience came from. The campaign pivoted to attacking Erika Kirk personally over the following months, peaking on <strong style="color:var(--ink);font-weight:600">14 March 2026</strong> with the wiretap claim (15.4M engagements account-wide; 11.7M on the false tweet itself). At its peak global influencer rank — <strong style="color:var(--ink);font-weight:600">2,796 on 28 November 2025</strong> — the account ranked in the top fraction of a percent of all X creators on Earth that day. Defamation per se reaches further when the publisher has a quarter-million followers and a four-digit global influence rank.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= EXHIBIT 1: WIRETAP ============= -->
+<section id="exhibit-one">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker kicker--red">§ 03 — Exhibit 1</span>
+      <h2>The wiretap that never was.</h2>
+      <p class="standfirst">On 14 March 2026, @ProjectConstitu published the most viral defamatory claim about Erika Kirk in the entire dataset — <strong style="color:var(--ink);font-weight:500">11.7 million engagements on a single tweet, 15.4 million across the day.</strong> Three steps. Three timestamps. The author refuted himself — quietly, hours later — but the false claim is the one that lived.</p>
+    </div>
+
+    <div class="smoking-gun-stack">
+      <article class="smoking-gun-step">
+        <div class="step-num">i.</div>
+        <div>
+          <h3><span class="label-pre">14 March · ~Morning</span>The false claim, "verified."</h3>
+          <div class="exhibit retracted">
+            <div class="exhibit-header">
+              <span class="ex-label">Original tweet · false attribution</span>
+              <span class="ex-engagement">11,600,000 engagements</span>
+            </div>
+            <div class="exhibit-body">
+              <p class="exhibit-quote">THE SMOKING GUN: Leaked DOJ Wiretap Audio Captures Erika Kirk Scheduling Underage Girls for Epstein. I have been sent a bombshell audio file, and I have verified its authenticity. This is not a rumor. This is not a theory.</p>
+              <p class="exhibit-note"><span class="label">Filed Note</span>The author claimed to have "verified" an audio file identifying Erika Kirk. He had not. The voice belonged to someone else entirely.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="smoking-gun-step">
+        <div class="step-num">ii.</div>
+        <div>
+          <h3><span class="label-pre">14 March · Hours Later</span>Doubling down before correcting.</h3>
+          <div class="exhibit">
+            <div class="exhibit-header">
+              <span class="ex-label">Follow-up</span>
+              <span class="ex-engagement">7,036 likes</span>
+            </div>
+            <div class="exhibit-body">
+              <p class="exhibit-quote">FOLLOW-UP: The Erika Kirk Audio is REAL, and the context is even more DAMNING than we Initially Thought.</p>
+              <p class="exhibit-note"><span class="label">Filed Note</span>Before correcting, the author amplified the false claim to his audience again.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="smoking-gun-step">
+        <div class="step-num">iii.</div>
+        <div>
+          <h3><span class="label-pre">14 March · Evening</span>The quiet correction.</h3>
+          <div class="exhibit">
+            <div class="exhibit-header">
+              <span class="ex-label">Correction post</span>
+              <span class="ex-engagement">2,081 likes — 5% of original</span>
+            </div>
+            <div class="exhibit-body">
+              <p class="exhibit-quote">CORRECTION: I would like to issue a correction regarding my previous post where I claimed the audio featured Erika Kirk. Upon further verification, the individual in the recording is actually Haley Robson.</p>
+              <p class="exhibit-note"><span class="label">Filed Note</span>The math: 38,582 people liked the false accusation. 2,081 saw the correction. Tens of thousands of people still believe Erika Kirk was recorded scheduling underage girls for Epstein. She was not.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ERIKA ============= -->
+<section id="erika">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 04 — Primary Subject</span>
+      <h2>106 posts about <em>Erika Kirk</em>.</h2>
+      <p class="standfirst">A widow recast as a villain. The account accuses her of sex trafficking, murder conspiracy, intelligence operations, fabricated credentials, and personal-life deceptions — every category of defamation per se, often inside a single week.</p>
+    </div>
+
+    <div class="stat-block">
+      <div class="cell"><span class="num-lg">36</span><p class="desc">Murder / Assassination Conspiracy</p></div>
+      <div class="cell"><span class="num-lg">30</span><p class="desc">Sex Trafficking / Epstein</p></div>
+      <div class="cell"><span class="num-lg">23</span><p class="desc">Lying / Cover-Up</p></div>
+      <div class="cell"><span class="num-lg">15</span><p class="desc">Intelligence Agency Accusations</p></div>
+    </div>
+
+    <div class="tabs" id="erika-tabs">
+      <div class="tab active" data-filter="all">All — Top 15</div>
+      <div class="tab" data-filter="Sex Trafficking/Epstein">Epstein</div>
+      <div class="tab" data-filter="Murder/Assassination Conspiracy">Murder</div>
+      <div class="tab" data-filter="Intelligence Agency Accusations">CIA / Intel</div>
+      <div class="tab" data-filter="Personal/Sexual Attacks">Personal</div>
+      <div class="tab" data-filter="Lying/Cover-Up">Cover-Up</div>
+    </div>
+    <div class="exhibit-grid" id="erika-tweets"></div>
+  </div>
+</section>
+
+<!-- ============= TPUSA ============= -->
+<section id="tpusa">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 05 — Secondary Subject</span>
+      <h2>93 posts about <em>Turning Point USA</em>.</h2>
+      <p class="standfirst">TPUSA is consistently labeled a "syndicate" and a "criminal enterprise." Specific executives — by name — are accused of cover-ups, of fabricating alibis, of trafficking children, of defrauding elderly donors through the mail. The seven highest-engagement posts in this section all originated in the post-assassination 8-week window of September–October 2025, when the audience tripled.</p>
+    </div>
+
+    <div class="stat-block">
+      <div class="cell"><span class="num-lg">45</span><p class="desc">Murder / Assassination Conspiracy</p></div>
+      <div class="cell"><span class="num-lg">23</span><p class="desc">Lying / Cover-Up</p></div>
+      <div class="cell"><span class="num-lg">21</span><p class="desc">Criminal Accusations</p></div>
+      <div class="cell"><span class="num-lg">9</span><p class="desc">Intelligence Agency</p></div>
+    </div>
+
+    <div class="exhibit-grid" id="tpusa-tweets"></div>
+  </div>
+</section>
+
+<!-- ============= REPLIES ============= -->
+<section id="replies">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 06 — In the Replies</span>
+      <h2>Same accusations. <em>No "BOMBSHELL."</em></h2>
+      <p class="standfirst">Strip away the emojis, the all-caps headlines, the "EXPOSED" packaging — and the same factual claims appear in plain reply threads. Under the totality-of-circumstances test, this is the part a court reads to decide whether "hyperbole" is a real defense or a costume.</p>
+    </div>
+
+    <div class="stat-block">
+      <div class="cell"><span class="num-lg">29</span><p class="desc">Direct replies flagged — separate from the 292 flagged tweets</p></div>
+      <div class="cell"><span class="num-lg">5,749</span><p class="desc">Combined likes on those 29 replies — not whispers, amplified accusations</p></div>
+    </div>
+
+    <div class="exhibit-grid" id="replies-tweets"></div>
+  </div>
+</section>
+
+<!-- ============= TIMELINE ============= -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 07 — Chronology</span>
+      <h2>A campaign that <em>keeps escalating.</em></h2>
+      <p class="standfirst">What began as criticism of TPUSA's handling of Charlie Kirk's legacy hardened into accusations of trafficking, assassination conspiracy, and intelligence operations. Selected entries below.</p>
+    </div>
+
+    <div class="timeline-wrap" id="timeline-content"></div>
+  </div>
+</section>
+
+<!-- ============= DATA ============= -->
+<section id="data">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 08 — The Record</span>
+      <h2>Top 30 most-engaged flagged posts.</h2>
+      <p class="standfirst">Sorted by total engagement. Each entry reproduces the original post text, links to the source on X, and notes the legal exposure framing in italic.</p>
+    </div>
+    <div class="exhibit-grid" id="all-tweets"></div>
+  </div>
+</section>
+
+<!-- ============= LEGAL ============= -->
+<section id="legal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">§ 09 — Legal Exposure</span>
+      <h2>Why this matters legally.</h2>
+      <p class="standfirst">Informational analysis, not legal advice. The sketch below is drawn from black-letter defamation doctrine; the underlying facts in the record are what matter.</p>
+    </div>
+
+    <div class="legal-grid">
+      <div class="legal-cell">
+        <h3>Defamation per se</h3>
+        <p>All four common-law categories appear in the record: criminal conduct, professional harm, sexual misconduct, moral turpitude. Damages are presumed; specific monetary loss need not be proven.</p>
+      </div>
+      <div class="legal-cell">
+        <h3>Actual malice</h3>
+        <p>The wiretap retraction is direct evidence the author claimed "verification" he had not performed. Continued publication after two cease-and-desist letters supports the second prong: reckless disregard for truth.</p>
+      </div>
+      <div class="legal-cell">
+        <h3>Massive reach</h3>
+        <p><strong style="color:var(--ink);font-weight:600">284,424 followers.</strong> 641 million engagements over the trailing year, +257% YoY. A peak global influencer rank of 2,796. The single false Epstein claim alone reached 11.6 million.</p>
+      </div>
+      <div class="legal-cell">
+        <h3>Two cease &amp; desists</h3>
+        <p>TPUSA sent at least two cease-and-desist letters during the period reviewed. The author published both publicly and continued. That is usable evidence of intentional, ongoing conduct.</p>
+      </div>
+    </div>
+
+    <div class="aside" style="border-left-color:var(--gold);margin-top:2rem">
+      <span class="kicker kicker--gold">Collateral Damage · Sentiment Capture</span>
+      <h3 style="margin-top:0.6rem">The campaign has measurably reshaped how the target is described.</h3>
+      <p>Per LunarCrush's auto-generated topic summary for "Turning Point USA" (pulled 1 May 2026), the dominant <em>critical themes</em> in the public conversation are now <strong style="color:var(--ink);font-weight:600;font-style:normal">"Erika Kirk Controversy &amp; Event Criticism" at 40%</strong> and "JD Vance Criticism &amp; Controversy" at 20%. Sentiment for the organization hit a one-year low of <strong style="color:var(--ink);font-weight:600;font-style:normal">28%</strong> on 30 September 2025 — within weeks of the assassination, as the smear campaign was peaking — and has only partially recovered to 53%. This is what reputational injury looks like quantified: a deliberately-published narrative becomes, over time, the public record of the entity it targets.</p>
+    </div>
+
+    <aside class="aside">
+      <h3>The "Allegedly" defense will not work.</h3>
+      <p>The account occasionally hedges with "ALLEGEDLY" or frames accusations as questions ("Was She Hiding In a CIA Front Company?"). Courts have consistently held that this framing does not immunize defamatory content. Under the totality-of-circumstances test, what matters is the overall impression on a reasonable reader. When the surrounding text uses BOMBSHELL, SMOKING GUN, PROVES, DESTROYED, and EXPOSED — the impression is factual assertion, not speculation.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="wrap">
+    <div class="filing-meta">
+      <span>End of investigation 001</span>
+      <span>Filed 2026·04·30</span>
+      <span>Apple Lamps · @lamps_apple</span>
+    </div>
+    <p>This site documents publicly available posts from the X account @ProjectConstitu for the purpose of demonstrating a pattern of potentially defamatory content targeting Erika Kirk and Turning Point USA. Analysis covers content reviewed through 30 April 2026: 1,541 original posts and 29 direct replies, gathered via X API v2. Account-level reach metrics — followers, engagement totals, daily peaks, influencer rank, and topic positioning — are sourced from LunarCrush, pulled 1 May 2026. The account had 284,424 followers at that point, +184% over the trailing twelve months. This is not legal advice.</p>
+    <p class="colophon">Set in Cormorant Garamond &amp; Source Serif 4. Data in IBM Plex Mono. © 2026.</p>
+  </div>
+</footer>
+
+<script>
+// ============= DATA =============
+const ERIKA_POSTS = [
+  {date:"2026-04-29",eng:"3,196 likes",text:"😱Erika Kirk's FULL SPEECH Exposed—Using Emotional BLACKMAIL To Attack Her Critics 👀",url:"https://x.com/ProjectConstitu/status/2049525392977916367",cats:["Personal/Sexual Attacks","Lying/Cover-Up"],legal:"Frames a public address by Erika Kirk as a manipulative \"emotional blackmail\" performance against critics."},
+  {date:"2026-04-30",eng:"898 likes",text:"‼️EXPOSED: Mikey McCoy Was The MOLE—Candace Just Dropped The Ultimate TPUSA BOMBSHELL! 💣👀",url:"https://x.com/ProjectConstitu/status/2049990344268214578",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"],legal:"Names a specific TPUSA staffer as an internal \"mole\" tied to the assassination narrative."},
+  {date:"2026-04-21",eng:"336 likes",text:"😱 The CHILLING Dinner Where Erika's Mom Tried to Buy a Piece of the Weapons Industry—Is Erika Kirk The New Jeffrey EPSTEIN? 👀",url:"https://x.com/ProjectConstitu/status/2046723078235795919",cats:["Sex Trafficking/Epstein","Intelligence Agency Accusations"],legal:"Direct rhetorical equation of Erika Kirk with Jeffrey Epstein. Defamation per se."},
+  {date:"2026-04-17",eng:"3,520 likes",text:"BREAKING: Pinnacle High SCRAPS Erika Kirk Event After Federal Lawsuit Threat! ⚖️📉 The legal walls are closing in on Erika Kirk and TPUSA. A Cease and Desist sent to Paradise Valley Unified School District...",url:"https://x.com/ProjectConstitu/status/2045063417766035611",cats:["Criminal Accusations","Lying/Cover-Up"],legal:"Frames a school-district scheduling decision as legal collapse closing in on Erika Kirk personally."},
+  {date:"2026-04-10",eng:"3,012 likes",text:"🚨 THE MASK SLIPS: Erika Kirk CLAIMS Her Marriage To Charlie Was PERFECT And Gets Fact Checked By Her OWN Pastor— Kaddis Says He WARNED Charlie He Was Too Gullible🤯",url:"https://x.com/ProjectConstitu/status/2042806864237228100",cats:["Personal/Sexual Attacks","Lying/Cover-Up"],legal:"Uses a pastor's remarks to frame Erika Kirk's marriage as a deception Charlie was \"too gullible\" to see."},
+  {date:"2026-04-06",eng:"5,283 likes",text:"🚨SHOCKING: Jake Paul Just Exposed the Truth About Erika Kirk: His Answer Tell's You EVERYTHING You Need To Know!😱",url:"https://x.com/ProjectConstitu/status/2041088278225445206",cats:["Personal/Sexual Attacks"],legal:"Cites a celebrity reaction shot to insinuate that Erika Kirk's true character is publicly understood to be damning."},
+  {date:"2026-04-25",eng:"11,254 likes",text:"‼️ BOMBSHELL: Erika Kirk is LEGALLY DISQUALIFIED as Victim Rep In Tyler Robinson Trial—Utah Statute EXPOSED👀",url:"https://x.com/ProjectConstitu/status/2048017893485339109",cats:["Criminal Accusations"],legal:"Accusation challenges her legal role in the Tyler Robinson proceedings."},
+  {date:"2026-04-24",eng:"9,218 likes",text:"🚨 EXPOSED: Tim Pool Accidentally LEAKED The Multi-Million Dollar Cover-Up to PROTECT Erika Kirk 👀",url:"https://x.com/ProjectConstitu/status/2047722115869073775",cats:["Lying/Cover-Up"],legal:"Frames a multi-million-dollar network as a coordinated cover-up around coverage of her name."},
+  {date:"2026-04-16",eng:"1,531 likes",text:"BOMBSHELL: Erika Kirk Was ALREADY in Athens While Claiming a \"Threat\"—JD Vance's Plane Was Forced to CIRCLE While Erika Kirk \"CRASHED OUT\" Backstage.😱",url:"https://x.com/ProjectConstitu/status/2044915716248277292",cats:["Lying/Cover-Up"],legal:"Claims inconsistency between a stated threat and actual travel/event behavior."},
+  {date:"2026-04-13",eng:"15,187 likes",text:"🚨EXPOSED: Lori Frantzve Appears In Edward Snowden LEAKED Prism Docs As \"NSA Agent\"—Erika Kirk's Mom CONFIRMED As Intelligence Asset.😱",url:"https://x.com/ProjectConstitu/status/2043691823915299155",cats:["Intelligence Agency Accusations"],legal:"Connects a family member to intelligence-linked leaks to support intelligence-affiliation allegations."},
+  {date:"2026-04-08",eng:"2,735 likes",text:"🚨EXPOSED: Deleted Video Of Erika Kirk's Admitting Her Relationships Are \"Transactional\"—Erika Admits She Was the \"Neck\" Moving the Head😱",url:"https://x.com/ProjectConstitu/status/2041894550176710805",cats:["Personal/Sexual Attacks"],legal:"Frames private relationship history as transactional through alleged deleted footage references."},
+  {date:"2026-04-02",eng:"6,222 likes",text:"Erika Kirk says she doesn't care what people say online—then reportedly sends two cease-and-desist letters.",url:"https://x.com/ProjectConstitu/status/2039879945934024990",cats:["Lying/Cover-Up"],legal:"Contrasts a public statement with legal escalation to frame inconsistency."},
+  {date:"2026-03-26",eng:"6.8M",text:"EXPOSED: Newly RESURFACED Video of Erika Kirk in a Bathrobe Rapping In BED With Her Then Roommate Sydney Stahl Give Off HUGE Lesbian Vibes.",url:"https://x.com/ProjectConstitu/status/2037267819503517932",cats:["Personal/Sexual Attacks"],legal:"Designed to attack her reputation within conservative audiences by insinuating her sexuality."},
+  {date:"2026-02-26",eng:"5M",text:"BOMBSHELL: Candace Owens Just UNCOVERED Erika Kirk's SECRET Early Years And Its WILDER Than Anyone Expected. Was Erika BORN A MALE...",url:"https://x.com/ProjectConstitu/status/2026813316039848010",cats:["Personal/Sexual Attacks","Intelligence Agency Accusations"],legal:"Asks whether Erika Kirk was 'born male' to 273K followers. Defamatory personal attack."},
+  {date:"2026-03-25",eng:"3.5M",text:"LEAKED TAPE: Erika Kirk's UNREGISTERED Meeting Triggers FORMAL Investigation and Massive LAWSUIT.",url:"https://x.com/ProjectConstitu/status/2036885930917978177",cats:["Lying/Cover-Up"],legal:"Claims ASU is launching a \"formal investigation\" based on the meeting. 13,742 likes."},
+  {date:"2026-01-08",eng:"2.1M",text:"SHOCKING: Erika Kirk EXPOSED in Secret CIA-Linked Doc Briefing Officials on Grid-Wiping EMP Attacks.",url:"https://x.com/ProjectConstitu/status/2009230091415417113",cats:["Intelligence Agency Accusations"],legal:"Accuses Erika Kirk of being linked to CIA operations and EMP attack briefings."},
+  {date:"2026-01-02",eng:"1.2M",text:"SHOCKING: Erika Kirk Is a ROTHSTEIN. The Family Ties That Could BLOW the Charlie Kirk Case WIDE OPEN.",url:"https://x.com/ProjectConstitu/status/2007004227948745180",cats:["Sex Trafficking/Epstein","Criminal Accusations"],legal:"Uses family name association to imply criminal connections. Guilt by ancestry."},
+  {date:"2026-03-17",eng:"975.9K",text:"BREAKING: Erika Kirk Went On A Shopping SPREE The Day AFTER Charlie Was Assassinated.",url:"https://x.com/ProjectConstitu/status/2033908057382494293",cats:["Murder/Assassination Conspiracy"],legal:"Uses shopping receipts to imply lack of grief, framing her as a suspect in her husband's murder."},
+  {date:"2026-03-12",eng:"741.5K",text:"BOMBSHELL: Candace Owens Connects Erika Kirk To Apartment Building That Jeffrey Epstein Housed His Underage Victims — She Was The Point Person...",url:"https://x.com/ProjectConstitu/status/2032216044480364847",cats:["Sex Trafficking/Epstein"],legal:"Accuses Erika Kirk of being the 'point person' for Epstein's housing of underage victims."},
+  {date:"2026-01-28",eng:"474.6K",text:"FULL LEAKED AUDIO: Erika Kirk's Employee Zoom Call JUST 11 DAYS After Charlie Kirk's Assassination. Upbeat, Laughing, Bragging About Metrics...",url:"https://x.com/ProjectConstitu/status/2016461787676188754",cats:["Murder/Assassination Conspiracy"],legal:"Uses a business call tone to imply she was unbothered by her husband's death."},
+  {date:"2026-03-09",eng:"6,255 likes",text:"VIRAL: The Spell is BREAKING... Comedians Like Tim Dillon EXPOSE Erika Kirk as Charlie's HANDLER & Executioner!",url:"https://x.com/ProjectConstitu/status/2031155167979008379",cats:["Murder/Assassination Conspiracy","Personal/Sexual Attacks"],legal:"Calls Erika Kirk 'Charlie's executioner' — a direct accusation of murder."},
+  {date:"2025-10-26",eng:"2M",text:"🚨FROM SIDEKICK TO SUCCESSOR IN 6 WEEKS: Was Mikey McCoy Groomed to Replace Charlie Kirk 🤔Footage Shows McCoy Flee the Scene Was It All Planned",url:"https://x.com/ProjectConstitu/status/1982521661464490168",cats:["Sex Trafficking/Epstein"]},
+  {date:"2025-12-19",eng:"1.1M",text:"🚨BREAKING BOMBSHELL: Erika Kirk Brian Harpole & Mark Amodei CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT EYEWITNESS Goes Public",url:"https://x.com/ProjectConstitu/status/2001816557450584541",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-20",eng:"402.1K",text:"🚨BOMBSHELL: Charlie Kirk ASSASSINATED BY DRONE from FORT HUACHUCA Erika's FAMILY TIES to the Base Are EXPLOSIVE 💥",url:"https://x.com/ProjectConstitu/status/2002294277150478706",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-22",eng:"148.8K",text:"Erika Kirk Is So COOKED Now would be a good time for her to hop on one of those Egyptian Planes and flee the country because we are so close to nailing her ass to the wall with being involved in this conspiracy to take out Charlie.",url:"https://x.com/ProjectConstitu/status/2002924656714563759",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-12-12",eng:"158.7K",text:"🚨EXPOSED: Erika Kirk Just Got CAUGHT LYING On National TV About Charlies FINAL TEXT And We Have the RECEIPTS🧾",url:"https://x.com/ProjectConstitu/status/1999310251917513180",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-12-13",eng:"116.7K",text:"🚨EXPOSED: Erika Kirk Just Spit On Charlie Kirk's Grave Rolling Out The Red Carpet (and Shabbat) For The Exact Donors Who Charlie Rejected Before His Execution",url:"https://x.com/ProjectConstitu/status/1999656548906193036",cats:["Murder/Assassination Conspiracy","Financial Fraud Accusations"]},
+  {date:"2025-11-06",eng:"94K",text:"🚨BOMBSHELL: Erika Kirk Points Finger at Hunter Kozak Guy Who Asked About TRANS VIOLENCE Seconds Before Charlie's Murder But She's Also Buying the FBI's Story Hook Line & Sinker",url:"https://x.com/ProjectConstitu/status/1986281974504296723",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2026-03-06",eng:"5,126 likes",text:"BUSTED: Erika Kirk's ENTIRE College Story is a LIE — NO Double Major, NO Summa Cum Laude AND Her and Tyler Bowyer KNEW Each Other Since 2012!",url:"https://x.com/ProjectConstitu/status/2029726153779360252",cats:["Professional/Credential Attacks"],legal:"If these academic claims are true, this is provably false defamation of professional reputation."},
+  {date:"2026-04-15",eng:"402 likes",text:"🆘EXPOSED: Candace Owens Exposes the FAKE \"Threat\" Narrative—Proof Turning Point LIED About the Erika Kirk No-Show 📄",url:"https://x.com/ProjectConstitu/status/2044536346530787718",cats:["Lying/Cover-Up"],legal:"Accuses Turning Point of sustaining a false-threat explanation for an absence narrative."}
+];
+
+const TPUSA_POSTS = [
+  {date:"2025-09-12",eng:"15.0M",text:"🚨EXCLUSIVE: FULL Lost Debate Video Shows Charlie Kirk HUMILIATING His Future Killer Leftist...",url:"https://x.com/ProjectConstitu/status/1966627346720403495",cats:["Murder/Assassination Conspiracy"],legal:"Posted 2 days after the assassination — the single most-engaged tweet in the entire dataset. Frames the alleged assassin in 'future killer' framing and seeded the post-event narrative."},
+  {date:"2025-10-01",eng:"13.9M",text:"🚨 BREAKING ANALYSIS: New Video Evidence Suggests Shot Fired FROM INSIDE the Tent",url:"https://x.com/ProjectConstitu/status/1973422630888931397",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"],legal:"Asserts the shot came from inside the TPUSA-controlled tent — implying the organization itself was involved in the assassination."},
+  {date:"2025-10-04",eng:"13.6M",text:"🚨BREAKING: NEW CAMERA ANGLE BLOWS OPEN CHARLIE KIRK SHOOTING — Shooter HID Behind Tent",url:"https://x.com/ProjectConstitu/status/1974524484158681334",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"],legal:"Same framing extended — alleges the assassin was concealed at TPUSA's own infrastructure, implicating the organization in concealment."},
+  {date:"2025-09-20",eng:"7.7M",text:"🚨BOMBSHELL: MIND-BLOWING Twist In Charlie Kirk MURDER: Shot From UTILITY SHAFT BEHIND HIM",url:"https://x.com/ProjectConstitu/status/1969499443545141752",cats:["Murder/Assassination Conspiracy"],legal:"Earlier 'inside job' variant — locates the shooter in TPUSA-adjacent infrastructure."},
+  {date:"2025-11-26",eng:"7.0M",text:"🚨SHOCKING: A Young CHRISTIAN WOMAN Walked Into A TPUSA Faith Event Expecting Jesus She Left In Tears",url:"https://x.com/ProjectConstitu/status/1993746024058224816",cats:["Lying/Cover-Up","Professional/Credential Attacks"],legal:"Frames a TPUSA Faith event as spiritually fraudulent through anonymous attendee testimony."},
+  {date:"2025-09-15",eng:"5.9M",text:"🚨 BREAKING: VIDEO Suggest Charlie Kirk Might Of Been SHOT From The Right Side From Behind",url:"https://x.com/ProjectConstitu/status/1967477012647342455",cats:["Murder/Assassination Conspiracy"],legal:"Continues the 'inside the tent' positioning thread — implies the official narrative is wrong about shooter location."},
+  {date:"2025-10-25",eng:"5.2M",text:"🚨 BOMBSHELL EXPOSÉ: Pastor Rob McCoy CAUGHT LYING About His Son's \"Heroic\" Actions After Charlie Kirk's Assassination",url:"https://x.com/ProjectConstitu/status/1982018864486535468",cats:["Lying/Cover-Up","Murder/Assassination Conspiracy"],legal:"Names a TPUSA-affiliated pastor and accuses him of fabricating a heroism narrative around his son's actions on the day of the assassination."},
+  {date:"2026-03-29",eng:"21,230 likes",text:"🚨EXPOSED: Here's What Joe Kent COULDN'T Say On Alex Jones Show—12 FOREIGN Cell Phones Were On The Ground At UVU When Charlie Kirk Was Assassinated.",url:"https://x.com/ProjectConstitu/status/2038167542057857524",cats:["Murder/Assassination Conspiracy","Intelligence Agency Accusations"],legal:"Asserts a foreign-intelligence \"nexus\" was physically present at UVU during the assassination, framing the event as a state-level conspiracy."},
+  {date:"2026-04-29",eng:"19,970 likes",text:"‼️EXPOSED: TPUSA's Secret $9 Million Real Estate Empire Exposed—Buying Entire Business Parks in Cash While Begging You for $20",url:"https://x.com/ProjectConstitu/status/2049568285184651541",cats:["Financial Fraud Accusations","Lying/Cover-Up"],legal:"Alleges TPUSA concealed significant real estate and cash assets through a shell entity while publicly requesting small donor contributions."},
+  {date:"2026-04-04",eng:"8,336 likes",text:"🚨EXPOSED: Dan Bongino JUST Admitted His Wife WORKED For Andrew Kolvet And TPUSA Doing Their Scheduling—Are The Bongino's COLLUDING With TPUSA To Railroad Tyler Robinson?",url:"https://x.com/ProjectConstitu/status/2040285868175376554",cats:["Criminal Accusations","Lying/Cover-Up"],legal:"Alleges coordination through close staffing ties while discussing the Tyler Robinson matter."},
+  {date:"2026-04-25",eng:"5,205 likes",text:"‼️ Utah Law JUST Handed CANDACE OWENS The Keys To The Tyler Robinson Case—She Can File As VICTIM Representative And CANCEL Out Erika Kirk",url:"https://x.com/ProjectConstitu/status/2048023932058423514",cats:["Criminal Accusations","Lying/Cover-Up"],legal:"Misreads Utah victim-rights statute to claim Erika Kirk's legal standing can be \"canceled.\""},
+  {date:"2026-04-20",eng:"3,896 likes",text:"THE NARRATIVE JUST COLLAPSED: Leaked Audio of Tyler Robinson's Grandfather Destroys the State's Case",url:"https://x.com/ProjectConstitu/status/2046349701797290193",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"],legal:"Treats partial courtroom audio as proof the entire prosecution against the charged shooter is fabricated."},
+  {date:"2026-04-13",eng:"3,723 likes",text:"🚨 BOMBSHELL: Candace Just Confirmed The TPUSA \"SUCCESSION\" Audio From The Aspen Donor Summit Is A Total FRAUD.",url:"https://x.com/ProjectConstitu/status/2043815489860972761",cats:["Lying/Cover-Up","Criminal Accusations"],legal:"Asserts donor-summit audio used to legitimize Erika Kirk's CEO succession is a manufactured fraud."},
+  {date:"2026-04-07",eng:"3,574 likes",text:"🚨 BOMBSHELL: Dan Bongino EXPOSED as Deep State Gatekeeper Protecting Child Traffickers— Brushed OFF John Walsh's Daughter Who BEGGED For His Help!",url:"https://x.com/ProjectConstitu/status/2041478603431444926",cats:["Sex Trafficking/Epstein","Criminal Accusations"],legal:"Directly accuses a named federal official of protecting child traffickers — defamation per se against a public figure."},
+  {date:"2026-04-05",eng:"5,069 likes",text:"🚨UPDATE: The Full Story Is EVEN Worse— TPUSA Cut His Mic, But The Crowd Revolted",url:"https://x.com/ProjectConstitu/status/2040941749493694814",cats:["Lying/Cover-Up"],legal:"Claims TPUSA staged its own Q&A and silenced a dissenting student."},
+  {date:"2026-03-28",eng:"6,397 likes",text:"TPUSA IS PANICKING: I Just Received A SECOND 'Cease & Desist' Letter From TPUSA Demanding I STOP Investigating Them — My Answer Is NO!",url:"https://x.com/ProjectConstitu/status/2037754488379900255",cats:["Criminal Accusations"],legal:"Public defiance of legal warnings is usable as evidence of continued intentional conduct."},
+  {date:"2026-02-22",eng:"3.6M",text:"BOMBSHELL: NEVER-BEFORE-SEEN TPUSA Camera STILLS From Behind Charlie LEAKED From The Day He Was KILLED. Dark Marks VISIBLE On His Hands...",url:"https://x.com/ProjectConstitu/status/2025706776260120871",cats:["Murder/Assassination Conspiracy"],legal:"Implies TPUSA concealed crime scene evidence."},
+  {date:"2026-03-04",eng:"2,183 likes",text:"MASSIVE BOMBSHELL: Erika Kirk, Tyler Bowyer, and Jeffrey Epstein's Paths All Intersect In ROMANIA At A Romania MODELING Agency — Did Erika Kirk and Tyler Bowyer Actually Meet While TRAFFICKING Children In Romania?",url:"https://x.com/ProjectConstitu/status/2028995586012131437",cats:["Sex Trafficking/Epstein"],legal:"Directly asks whether two named individuals met while trafficking children. Defamation per se."},
+  {date:"2025-10-06",eng:"362K",text:"MIND-BLOWING THEORY: Was TPUSA's Security Chief Dan Flood BLACKMAILED into Helping Assassinate Charlie Kirk to Bury His DARK SECRETS...",url:"https://x.com/ProjectConstitu/status/1975065614801584327",cats:["Murder/Assassination Conspiracy"],legal:"Accuses Dan Flood of being blackmailed into participating in assassination."},
+  {date:"2025-12-06",eng:"2.6M",text:"🚨 MASSIVE UPDATE: The Marseille Hat Conspiracy Just Got DEEPER French Foreign Legion Assassin Ties EXPOSED",url:"https://x.com/ProjectConstitu/status/1997384413139890264",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-12-02",eng:"1.8M",text:"🚨EXPLOSIVE BOMBSHELL: Candace Owens CONNECTS Charlie Kirks Assassination to a BILLION-DOLLAR DuPont Deal- TPUSA Insider's IMPLICATED",url:"https://x.com/ProjectConstitu/status/1995989523570856171",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-18",eng:"1.7M",text:"🚨BREAKING: MYSTERIOUS PRIVATE JET @RealCandaceO Exposed that flew a WEIRD route on the MORNING Charlie Kirk was ASSASSINATED. Belongs to a MAJOR TPUSA DONOR.",url:"https://x.com/ProjectConstitu/status/1990791732494237770",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-04",eng:"916.6K",text:"🚨EXCLUSIVE: New Video From UVU Shows TPUSA's First Arrival Blake Neff's Backseat Exit Minutes Before Charlie Was Assassinated",url:"https://x.com/ProjectConstitu/status/1985797786340601913",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-01",eng:"506.8K",text:"🚨 BOMBSHELL EVIDENCE: CONFIRMED NOT 2 BUT 5 EGYPTIAN MILITARY PLANES SWARMED PROVO in 2025 Direct Flights to Charlie Kirk's Assassination Site.",url:"https://x.com/ProjectConstitu/status/1984752930310733956",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-09-29",eng:"491.4K",text:"🚨 EXPOSED: Dan Flood's Secret Recording Of The Charlie Kirk Murder Did Charlie Kirk's Security Chief Hit Record On Smart Glasses Seconds Before the Shot",url:"https://x.com/ProjectConstitu/status/1972584114306892111",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-01",eng:"439.8K",text:"🚨EXPOSED: Charlie Kirk's Assassination Was NO Lone Gunman It Was a FOREIGN DRONE STRIKE Guided by INFRARED LASER from a TPUSA EMPLOYEE",url:"https://x.com/ProjectConstitu/status/1984744077917642983",cats:["Murder/Assassination Conspiracy","Intelligence Agency Accusations"]},
+  {date:"2025-10-16",eng:"421.5K",text:"🚨 EXPOSED: TPUSA's Tyler Bowyer CAUGHT LYING About NO Drones at Charlie Kirk's Assassination What Are They HIDING",url:"https://x.com/ProjectConstitu/status/1978940492445552802",cats:["Murder/Assassination Conspiracy","Lying/Cover-Up"]},
+  {date:"2025-12-04",eng:"329.6K",text:"🚨 BOMBSHELL: According To Ex-TPUSA EMPLOYEE Charlie Kirk Discovered SECRET $5M Stock Market Slush Fund With ZERO Employees Then Dropped DEAD",url:"https://x.com/ProjectConstitu/status/1996424567770759342",cats:["Murder/Assassination Conspiracy","Financial Fraud Accusations"]},
+  {date:"2025-12-12",eng:"217.8K",text:"🚨 EXPOSED: Turning Point USA's $36 MILLION STOCK GAMBLE Donor Cash on Wall Street Casino",url:"https://x.com/ProjectConstitu/status/1999559117640216933",cats:["Financial Fraud Accusations"]},
+  {date:"2025-10-08",eng:"212K",text:"🚨MASSIVE BREAKING NEWS: Dr. Frank Turek CONFIRMS Charlie Kirk FEARED ASSASSINATION before UVU shooting Also CONFIRMED TPUSA Was Running Drones Over UVU",url:"https://x.com/ProjectConstitu/status/1975820012762882535",cats:["Murder/Assassination Conspiracy"]},
+  {date:"2025-11-16",eng:"409.2K",text:"🚨BOMBSHELL: TPUSA's Tyler Boyer Demoted Then Kirk Murdered The Audit He Killed to Hide Donor Theft",url:"https://x.com/ProjectConstitu/status/1990067231871431007",cats:["Murder/Assassination Conspiracy"]}
+];
+
+const REPLY_POSTS = [
+  {date:"2026-04-28",eng:"309 likes",text:"because you ARE a FED and Erika Kirk DID participate in Charlie's assassination and/or the coverup in my opinion.",url:"https://x.com/ProjectConstitu/status/2049132162545320272",cats:["Murder/Assassination Conspiracy"],legal:"Plain reply directly accusing Erika Kirk of participating in her husband's assassination or its coverup. \"In my opinion\" does not insulate factual assertions of crime."},
+  {date:"2026-04-28",eng:"39 likes",text:"@HubaJoy probably because she participated in her husband's assassination. Erika is one cold, calculated, and evil Psychopath.",url:"https://x.com/ProjectConstitu/status/2049124577628848420",cats:["Murder/Assassination Conspiracy","Personal/Sexual Attacks"],legal:"Direct reply calling Erika Kirk a \"cold, calculated, and evil Psychopath\" who \"participated in her husband's assassination.\" Defamation per se."},
+  {date:"2026-04-15",eng:"152 likes",text:"@ClayTravis Erika Kirk is an intelligence asset, Not a WIDOW. She also is CEO of a company worth over $200 million...",url:"https://x.com/ProjectConstitu/status/2044329132889108944",cats:["Intelligence Agency Accusations"],legal:"Reply to a public commentator flatly asserting Erika Kirk is an \"intelligence asset\" rather than a grieving widow."},
+  {date:"2026-04-15",eng:"104 likes",text:"the only Jezzebel i see is Erika Frantzve. She's been nothing but a disingenuous, inauthentic fame whore her entire life. Every one of her relationships have been...",url:"https://x.com/ProjectConstitu/status/2044310098239975774",cats:["Personal/Sexual Attacks"],legal:"Reply attacking Erika Kirk's character and sexual reputation in plain prose, with no \"BOMBSHELL\" framing."},
+  {date:"2026-04-01",eng:"1,253 likes",text:"@BlakeSNeff It's fascinating to watch you descend into such an emotional, hysterical state. You're calling her a \"maniac\" and a \"predator\" because it's much easier to hurl ad hominem attacks than it is to address the actual claim.",url:"https://x.com/ProjectConstitu/status/2039541938068611375",cats:["Lying/Cover-Up"],legal:"High-engagement reply directed at a named TPUSA staffer."},
+  {date:"2026-04-01",eng:"1,181 likes",text:"@charliekirk11 STOP!!! 🛑 Stop posting from a dead mans account you scumbags.🤬",url:"https://x.com/ProjectConstitu/status/2039386815933603905",cats:["Lying/Cover-Up","Personal/Sexual Attacks"],legal:"Public reply addressed to TPUSA's continued use of Charlie Kirk's account."}
+];
+
+const ALL_TOP = [...ERIKA_POSTS, ...TPUSA_POSTS].sort((a,b) => {
+  function pe(s) { if (!s) return 0; s=s.replace(/,/g,"").replace(" likes",""); if(s.includes("M")) return parseFloat(s)*1e6; if(s.includes("K")) return parseFloat(s)*1e3; return parseFloat(s)||0; }
+  return pe(b.eng) - pe(a.eng);
+}).slice(0, 30);
+
+// ============= RENDER =============
+let exhibitCounter = 0;
+function pad(n) { return String(n).padStart(2,'0'); }
+
+function renderExhibit(post, idx) {
+  exhibitCounter++;
+  const n = pad(exhibitCounter);
+  const cls = post.retracted ? 'exhibit retracted' : 'exhibit';
+  const cats = post.cats.map(c => `<span class="cat">${c}</span>`).join("");
+  const legal = post.legal ? `<p class="exhibit-note"><span class="label">Filed exposure</span>${post.legal}</p>` : "";
+  return `
+    <article class="${cls}">
+      <header class="exhibit-header">
+        <span class="ex-label">Exhibit ${n} · ${post.date}</span>
+        <span class="ex-engagement">${post.eng}</span>
+      </header>
+      <div class="exhibit-body">
+        <p class="exhibit-quote">${post.text}</p>
+        <div class="exhibit-cats">${cats}</div>
+        ${legal}
+      </div>
+      <footer class="exhibit-footer">
+        <span></span>
+        <a href="${post.url}" target="_blank" rel="noopener" class="exhibit-source">View on X →</a>
+      </footer>
+    </article>`;
+}
+
+function renderSection(containerId, posts, limit) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = posts.slice(0, limit || 15).map(renderExhibit).join("");
+}
+
+// ============= TABS =============
+document.getElementById("erika-tabs").addEventListener("click", function(e) {
+  if (!e.target.classList.contains("tab")) return;
+  this.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  e.target.classList.add("active");
+  const filter = e.target.dataset.filter;
+  const filtered = filter === "all" ? ERIKA_POSTS : ERIKA_POSTS.filter(p => p.cats.some(c => c.includes(filter.split("/")[0])));
+  exhibitCounter = 0;
+  document.getElementById("erika-tweets").innerHTML = filtered.slice(0, 15).map(renderExhibit).join("");
+});
+
+// ============= TIMELINE =============
+function renderTimeline() {
+  const events = [
+    { date: "10 Sept 2025", text: "Charlie Kirk is assassinated at Utah Valley University during a TPUSA event.", major: true },
+    { date: "12 Sept 2025", text: "@ProjectConstitu publishes 'EXCLUSIVE: FULL Lost Debate Video Shows Charlie Kirk HUMILIATING His Future Killer' — the single most-engaged tweet in the entire dataset. (15M engagements)", major: true },
+    { date: "20 Sept 2025", text: "Publishes 'BOMBSHELL: MIND-BLOWING Twist' claiming the shot came from a 'UTILITY SHAFT BEHIND HIM.' (7.7M engagements)" },
+    { date: "1 Oct 2025", text: "Claims 'New Video Evidence Suggests Shot Fired FROM INSIDE the Tent' — first explicit framing that TPUSA's own infrastructure is implicated. (13.9M engagements)" },
+    { date: "4 Oct 2025", text: "'NEW CAMERA ANGLE BLOWS OPEN CHARLIE KIRK SHOOTING — Shooter HID Behind Tent.' (13.6M engagements)" },
+    { date: "5–6 Oct 2025", text: "Account-record engagement window. 18.1M engagements on 5 Oct, 12.3M on 6 Oct — over 30M across two days, all on TPUSA-conspiracy framing. Audience grows from ~180K to over 200K within weeks.", major: true },
+    { date: "6 Oct 2025", text: "Theory that TPUSA Security Chief Dan Flood was 'BLACKMAILED into helping assassinate Charlie Kirk.' (362K engagements)" },
+    { date: "25 Oct 2025", text: "'Pastor Rob McCoy CAUGHT LYING About His Son's Heroic Actions After Charlie Kirk's Assassination.' (5.2M engagements)" },
+    { date: "26 Oct 2025", text: "Asks if 'Mikey McCoy Was Groomed to Replace Charlie Kirk' and 'Flee the Scene.' (2M engagements)" },
+    { date: "18 Nov 2025", text: "Claims 'MYSTERIOUS PRIVATE JET' of TPUSA donor flew weird route morning of assassination. (1.7M engagements)" },
+    { date: "2 Dec 2025", text: "Connects assassination to 'BILLION-DOLLAR DuPont Deal' implicating TPUSA insiders. (1.8M engagements)" },
+    { date: "10 Dec 2025", text: "Claims 'CANDACE OWENS JUST ENDED ERIKA KIRK ON LIVE PODCAST.' (1.2M engagements)" },
+    { date: "19 Dec 2025", text: "Claims Erika Kirk 'CAUGHT AT FORT HUACHUCA The Day Before Charlie Kirk HIT.' (1.1M engagements)" },
+    { date: "20 Dec 2025", text: "Claims Charlie Kirk was 'ASSASSINATED BY DRONE from FORT HUACHUCA' with Erika's family ties to the base. (402K engagements)" },
+    { date: "8 Jan 2026", text: "Claims Erika Kirk appeared in a 'Secret CIA-Linked Doc' about EMP attacks. (2.1M engagements)" },
+    { date: "22 Feb 2026", text: "Claims leaked TPUSA camera stills show 'dark marks' on Charlie's hands, implying TPUSA concealed evidence. (3.6M engagements)" },
+    { date: "26 Feb 2026", text: "Asks whether Erika Kirk was 'BORN A MALE.' (5M engagements)" },
+    { date: "12 Mar 2026", text: "Accuses Erika Kirk of being the 'Point Person' for Epstein's housing of underage victims. (741K engagements)" },
+    { date: "14 Mar 2026", text: "THE FALSE WIRETAP CLAIM: posts that DOJ audio captures Erika Kirk scheduling underage girls for Epstein. Claims verification. Later retracted. (11.6M engagements)", major: true },
+    { date: "26 Mar 2026", text: "Posts old roommate video, insinuating Erika Kirk is secretly lesbian. (6.8M engagements)" },
+    { date: "28 Mar 2026", text: "Publicly posts and defies SECOND cease & desist letter from TPUSA. Accuses TPUSA of 'draining elderly bank accounts.'", major: true },
+    { date: "1 Apr 2026", text: "In a high-engagement reply (1,253 likes), addresses TPUSA's Blake Neff personally — strips away the 'BOMBSHELL' framing." },
+    { date: "4 Apr 2026", text: "Claims Dan Bongino and TPUSA ties through his wife's scheduling role are evidence of conflict of interest. (8,336 likes)" },
+    { date: "20 Apr 2026", text: "Claims 'leaked audio' destroys the state's case in the Tyler Robinson prosecution. (3,896 likes)" },
+    { date: "25 Apr 2026", text: "Claims Utah law disqualifies Erika Kirk as victim representative in the Tyler Robinson trial. (11,254 likes)" },
+    { date: "28 Apr 2026", text: "In a plain reply: 'Erika Kirk DID participate in Charlie's assassination and/or the coverup' and calls her a 'cold, calculated, and evil Psychopath.'", major: true },
+    { date: "29 Apr 2026", text: "Claims TPUSA holds a concealed real-estate and cash portfolio through an affiliated shell while asking grassroots members for donations. (19,970 likes)" },
+    { date: "30 Apr 2026", text: "Names a specific TPUSA staffer (Mikey McCoy) as an internal 'mole' tied to the assassination narrative. (898 likes)" },
+  ];
+  const el = document.getElementById("timeline-content");
+  el.innerHTML = events.map(e => `
+    <div class="timeline-item${e.major ? ' major' : ''}">
+      <div class="timeline-date">${e.date}</div>
+      <div class="timeline-text">${e.text}</div>
+    </div>`).join("");
+}
+
+// ============= CHARTS =============
+function renderCharts() {
+  const isMobile = window.innerWidth <= 768;
+  Chart.defaults.font.family = "'IBM Plex Mono', ui-monospace, monospace";
+  Chart.defaults.color = "#A8A096";
+
+  // Category bar — muted bars, ONE red highlight on the largest
+  const labels = isMobile
+    ? ["Murder","Lying","Trafficking","Intel","Criminal","Personal","Professional","Financial"]
+    : ["Murder/Assassination","Lying/Cover-Up","Sex Trafficking","Intelligence Agency","Criminal Accusations","Personal/Sexual","Professional","Financial Fraud"];
+  const values = [177, 102, 51, 53, 45, 23, 10, 12];
+  const max = Math.max(...values);
+  const colors = values.map(v => v === max ? "#B8362C" : "#5C544A");
+
+  const valueLabelPlugin = {
+    id: "valueLabels",
+    afterDatasetsDraw(chart) {
+      const {ctx, scales: {x}} = chart;
+      ctx.save();
+      values.forEach((val, i) => {
+        const bar = chart.getDatasetMeta(0).data[i];
+        const xPos = Math.min(bar.x + 6, x.right - 26);
+        ctx.fillStyle = "#A8A096";
+        ctx.font = "500 " + (isMobile ? "10" : "11") + "px 'IBM Plex Mono', monospace";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(val, xPos, bar.y);
+      });
+      ctx.restore();
+    }
+  };
+
+  new Chart(document.getElementById("catChart"), {
+    type: "bar",
+    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 0, barThickness: isMobile ? 14 : 18 }] },
+    plugins: [valueLabelPlugin],
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `  ${ctx.parsed.x} posts` } } },
+      scales: {
+        x: { grid: { color: "rgba(255,250,240,0.04)" }, ticks: { color: "#6B6258", font: { size: isMobile ? 10 : 11 } }, border: { display: false } },
+        y: { grid: { display: false }, ticks: { color: "#A8A096", font: { size: isMobile ? 10 : 11 }, padding: 4 }, border: { display: false } }
+      },
+      layout: { padding: { right: 30 } }
+    }
+  });
+
+  // Follower line chart — full year showing the post-assassination jump
+  const followerLabels = ["May '25","Jun '25","Jul '25","Aug '25","Sep 10 '25","Sep 30 '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+  const followerValues = [100456, 115795, 125477, 139156, 149511, 179067, 179524, 194001, 212736, 244082, 250977, 261653, 274341, 284441];
+
+  new Chart(document.getElementById("followerChart"), {
+    type: "line",
+    data: {
+      labels: followerLabels,
+      datasets: [{
+        data: followerValues,
+        borderColor: "#B8362C",
+        backgroundColor: "rgba(184,54,44,0.08)",
+        borderWidth: 2,
+        tension: 0.25,
+        fill: true,
+        pointRadius: 4,
+        pointBackgroundColor: "#B8362C",
+        pointBorderColor: "#1A1814",
+        pointBorderWidth: 1.5,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `  ${ctx.parsed.y.toLocaleString()} followers` } }
+      },
+      scales: {
+        x: { grid: { color: "rgba(255,250,240,0.04)" }, ticks: { color: "#A8A096", font: { size: 11 } }, border: { color: "#322D26" } },
+        y: {
+          grid: { color: "rgba(255,250,240,0.04)" },
+          ticks: { color: "#A8A096", font: { size: 11 }, callback: v => (v/1000) + "K" },
+          border: { color: "#322D26" },
+          beginAtZero: false
+        }
+      }
+    }
+  });
+
+  // Daily engagement bar — peak days across the full year
+  const engLabels = [
+    "Sep 13","Sep 30","Oct 04","Oct 05","Oct 06","Nov 28","Feb 26",
+    "Mar 13","Mar 14","Mar 22","Mar 27","Apr 06","Apr 11"
+  ];
+  const engValues = [
+    13859770,6981011,4322751,18120517,12281526,5486579,8262785,
+    4458603,15389507,4952441,6156531,5310367,5132936
+  ];
+  const engColors = engValues.map(v => v >= 15000000 ? "#B8362C" : v >= 10000000 ? "#8B4138" : v >= 6000000 ? "#5C544A" : "#3F3934");
+
+  new Chart(document.getElementById("engagementChart"), {
+    type: "bar",
+    data: { labels: engLabels, datasets: [{ data: engValues, backgroundColor: engColors, borderWidth: 0 }] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `  ${(ctx.parsed.y/1e6).toFixed(2)}M engagements` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: "#A8A096", font: { size: 10 }, maxRotation: 45, minRotation: 45 }, border: { color: "#322D26" } },
+        y: {
+          grid: { color: "rgba(255,250,240,0.04)" },
+          ticks: { color: "#A8A096", font: { size: 11 }, callback: v => (v/1e6) + "M" },
+          border: { color: "#322D26" },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Target chart — monochrome with red on Erika Kirk only
+  const targetLabels = ["Erika Kirk", "TPUSA", "Israel/Mossad", "A. Kolvet", "T. Bowyer", "B. Neff", "D. Flood", "J. Hammer"];
+  const targetValues = [106, 86, 33, 15, 12, 4, 4, 2];
+  const targetColors = ["#B8362C", "#7C746A", "#605850", "#4F4842", "#3F3934", "#322D29", "#2A2622", "#221F1B"];
+
+  new Chart(document.getElementById("targetChart"), {
+    type: "doughnut",
+    data: { labels: targetLabels, datasets: [{ data: targetValues, backgroundColor: targetColors, borderWidth: 1, borderColor: "#1A1814" }] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "62%",
+      plugins: {
+        legend: {
+          position: isMobile ? "bottom" : "right",
+          labels: { color: "#A8A096", font: { size: 11, family: "'IBM Plex Mono', monospace" }, padding: 10, boxWidth: 10, boxHeight: 10 }
+        },
+        tooltip: { callbacks: { label: ctx => `  ${ctx.label}: ${ctx.parsed} posts` } }
+      }
+    }
+  });
+}
+
+// ============= COUNTERS =============
+function animateCounters() {
+  document.querySelectorAll('.num[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString();
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString();
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+// ============= REVEAL =============
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.1 });
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// ============= INIT =============
+exhibitCounter = 0;
+renderSection("erika-tweets", ERIKA_POSTS, 15);
+renderSection("tpusa-tweets", TPUSA_POSTS, 10);
+renderSection("replies-tweets", REPLY_POSTS, 6);
+renderSection("all-tweets", ALL_TOP, 30);
+renderTimeline();
+renderCharts();
+setTimeout(animateCounters, 400);
+</script>
+</body>
+</html>
