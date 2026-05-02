@@ -6,22 +6,39 @@ Live site: [defamationtracker.com](https://defamationtracker.com/). Deployed on 
 
 ## Repository layout
 
-| File | Purpose |
-| --- | --- |
-| `index.html` | One-page report: hero, interactive charts (Chart.js), tweet grids with category filters, escalation timeline, legal analysis |
-| `page-local.css` | Supplemental styles extracted from former inline styles |
-| `og.jpg` | Open Graph / Twitter card image (1200×630); must stay at site root |
-| `favicon.svg` | SVG tab icon |
-| `robots.txt` | Allows crawlers; references `sitemap.xml` |
-| `sitemap.xml` | Single URL (`/`); bump `<lastmod>` after material changes |
-| `.gitignore` | Ignores `node_modules`, `.env`, `.vercel`, editor/OS files |
+```text
+.
+├── index.html              # Active homepage served at /
+├── favicon.svg             # Browser tab icon; keep at site root
+├── og.jpg                  # Open Graph / Twitter card image; keep at site root
+├── robots.txt              # Crawler rules; references sitemap.xml
+├── sitemap.xml             # Single URL sitemap for /
+├── data/
+│   ├── lunarcrush/         # LunarCrush reach, peak-day, and top-post exports
+│   └── x-export/           # X API exports and tracker review CSVs
+├── archive/
+│   ├── index-backup.html   # Previous homepage design before V2 was promoted
+│   └── page-local.css      # CSS used by the archived backup page
+└── README.md
+```
+
+`index-v2.html` was removed. It was only a temporary copy while V2 was being promoted, and keeping it created drift risk.
 
 ## Stack
 
-- Plain HTML + CSS. Chart.js loaded from cdnjs.
-- Mobile-first responsive: `100svh` hero for iOS Safari, `env(safe-area-inset-*)` for notch/Dynamic Island, horizontal-scroll nav, 44px touch targets, adaptive chart layouts (shorter labels, bottom legend on small screens).
-- SEO: meta description, canonical URL, Open Graph with `og.jpg`, Twitter Card (`summary_large_image`), JSON-LD graph (`WebSite`, `Organization`, `WebPage`, `Article`).
-- Safari compat: `-webkit-backdrop-filter` on sticky nav.
+- Plain HTML + CSS. Chart.js is loaded from cdnjs.
+- V2 uses a sticky editorial masthead, equal-column desktop nav, horizontal-scroll mobile nav, filing metadata strip, print-style stat rows, charts, exhibit cards, category filters, chronology, and legal context.
+- Responsive behavior: safe-area padding via `env(safe-area-inset-*)`, mobile-tightened typography and spacing, adaptive chart heights, and touch-friendly nav/tab targets.
+- SEO: meta description, canonical URL, Open Graph with `og.jpg`, and Twitter Card (`summary_large_image`).
+- Safari compat: `-webkit-backdrop-filter` on the sticky masthead.
+
+## Page editing
+
+`index.html` is the only live page. Make page edits there.
+
+The archived page in `archive/` is kept only for reference. Do not edit it unless you are intentionally restoring or comparing against the old design.
+
+Evidence exports live under `data/` so the root stays deployment-focused.
 
 ## Local preview
 
