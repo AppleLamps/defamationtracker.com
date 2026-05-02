@@ -8,18 +8,28 @@ Live site: [defamationtracker.com](https://defamationtracker.com/). Deployed on 
 
 ```text
 .
-├── index.html              # Active homepage served at /
-├── favicon.svg             # Browser tab icon; keep at site root
-├── og.jpg                  # Open Graph / Twitter card image; keep at site root
-├── robots.txt              # Crawler rules; references sitemap.xml
-├── sitemap.xml             # Single URL sitemap for /
+├── index.html                              # Active homepage served at /
+├── favicon.svg                             # Browser tab icon; keep at site root
+├── og.jpg                                  # Open Graph / Twitter card image; keep at site root
+├── robots.txt                              # Crawler rules; references sitemap.xml
+├── sitemap.xml                             # Single URL sitemap for /
 ├── data/
-│   ├── lunarcrush/         # LunarCrush reach, peak-day, and top-post exports
-│   └── x-export/           # X API exports and tracker review CSVs
+│   ├── lunarcrush/                         # LunarCrush reach, peak-day, and top-post exports
+│   └── x-export/                           # X API exports and tracker review CSVs
 ├── archive/
-│   ├── index-backup.html   # Previous homepage design before V2 was promoted
-│   └── page-local.css      # CSS used by the archived backup page
+│   ├── index-backup.html                   # Previous homepage design before V2 was promoted
+│   └── page-local.css                      # CSS used by the archived backup page
 └── README.md
+```
+
+The following directories are **gitignored** and not committed to the repo:
+
+```text
+├── owens/                                  # Raw .txt episode transcripts (Candace Owens podcast)
+├── trans/                                  # Raw Voxtral JSON transcription files
+├── transcripts_json/                       # Structured JSON episode transcripts
+├── candaceowens.md                         # Internal source-pipeline analysis
+└── ProjectConstitu_tweets5.1.26.csv        # Raw X export; large data file
 ```
 
 `index-v2.html` was removed. It was only a temporary copy while V2 was being promoted, and keeping it created drift risk.

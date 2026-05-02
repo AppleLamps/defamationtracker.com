@@ -33,3 +33,15 @@ npm-debug.log*
 # Local review / browser screenshot artifacts
 output/
 screenshots/
+
+# Research / transcript data (large, sensitive; not part of the deployed site)
+owens/
+trans/
+transcripts_json/
+candaceowens.md
+
+# Raw CSV exports at root
+ProjectConstitu_tweets5.1.26.csv
+
+# Claude IDE
+.claude/
