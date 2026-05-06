@@ -834,6 +834,102 @@ footer .colophon {
   .dropcap::first-letter { font-size: 4rem; }
 }
 
+/* ============= BREAKING BANNER ============= */
+.breaking-banner {
+  background: var(--bg-2);
+  border-top: 2px solid var(--red);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.4rem 0;
+  position: relative;
+}
+.breaking-banner::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+}
+.breaking-banner-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+}
+.bb-kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+.bb-pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--red);
+  display: inline-block;
+  animation: bb-pulse 1.5s infinite ease-in-out;
+  box-shadow: 0 0 0 0 rgba(184,54,44,0.55);
+}
+@keyframes bb-pulse {
+  0%   { opacity: 1; box-shadow: 0 0 0 0 rgba(184,54,44,0.55); }
+  70%  { opacity: 0.55; box-shadow: 0 0 0 6px rgba(184,54,44,0); }
+  100% { opacity: 1; box-shadow: 0 0 0 0 rgba(184,54,44,0); }
+}
+.bb-body {
+  flex: 1 1 420px;
+  min-width: 260px;
+}
+.bb-headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.005em;
+}
+.bb-sub {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  margin: 0;
+  max-width: 64ch;
+}
+.bb-cta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding: 0.3rem 0 0.4rem;
+  display: inline-block;
+  font-weight: 500;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: color 0.2s, border-color 0.2s;
+}
+.bb-cta:hover { color: var(--red); border-bottom-color: var(--ink); }
+
+@media (max-width: 700px) {
+  .breaking-banner-inner { gap: 0.7rem 1.5rem; }
+  .bb-headline { font-size: 1.05rem; }
+  .bb-sub { font-size: 0.88rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bb-pulse { animation: none; }
+}
+
 /* ============= NEXT INVESTIGATION CALLOUT ============= */
 .next-investigation {
   margin: 2.5rem 0;
@@ -915,6 +1011,18 @@ footer .colophon {
 </header>
 
 <a id="top"></a>
+
+<!-- ============= BREAKING BANNER · INVESTIGATION 002 ============= -->
+<aside class="breaking-banner" role="region" aria-label="Investigation 002 breaking update">
+  <div class="wrap breaking-banner-inner">
+    <span class="bb-kicker"><span class="bb-pulse" aria-hidden="true"></span>Breaking · 5 May 2026</span>
+    <div class="bb-body">
+      <p class="bb-headline">Loomer files public pre-litigation notice. Investigation 002 now live.</p>
+      <p class="bb-sub">Same conspiracy theorist, same methodology, second target. 125 ranked posts targeting Laura Loomer through 5 May 2026, ending in a time-stamped warning posted at 7:36&nbsp;PM ET on the day of filing.</p>
+    </div>
+    <a href="loomer/" class="bb-cta">Read Investigation 002 →</a>
+  </div>
+</aside>
 
 <!-- ============= HERO ============= -->
 <section class="hero">
@@ -1324,7 +1432,7 @@ footer .colophon {
       <div class="ni-body">
         <span class="kicker kicker--red">Investigation 002 · Now Filed</span>
         <h3>The Loomer Campaign.</h3>
-        <p class="ni-copy">Same publisher, same methodology, second target. 125 ranked posts targeting Laura Loomer between 22 March and 5 May 2026, ending in a public, time-stamped pre-litigation notice on the day of filing.</p>
+        <p class="ni-copy">Same conspiracy theorist, same methodology, second target. 125 ranked posts targeting Laura Loomer between 22 March and 5 May 2026, ending in a public, time-stamped pre-litigation notice on the day of filing.</p>
       </div>
       <a href="loomer/" class="ni-button">Press here →</a>
     </aside>
