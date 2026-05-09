@@ -43,5 +43,13 @@ candaceowens.md
 # Raw CSV exports at root
 ProjectConstitu_tweets5.1.26.csv
 
+# Raw tweet exports / data pipeline files
+ProjectConstitu_tweets*.jsonl
+continual-learning.json
+loomer/LauraLoomer_tweets*.jsonl
+loomer/loomer_campaign_full.json
+loomer/loomer_flagged_ranked.json
+loomer/ProjectConstitu_tweets-latest.jsonl
+
 # Claude IDE
 .claude/
